@@ -1,0 +1,82 @@
+/* DiscipleshipLessons: plainspoken, marked-up, warm. One light look, set on purpose. */
+:root {
+  --ink: #1D1D1D;
+  --ink-2: #333333;
+  --ink-3: #5A5A55;
+  --paper: #FFFFFF;
+  --paper-2: #F4F4F0;
+  --cream: #FBF6EA;
+  --rule: #E2E0D8;
+  --green: #1F7A4D;
+  --masters: #006747;
+  --marker: #FFE45C;
+  --body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --hand: 'Caveat', 'Comic Sans MS', cursive;
+  --serif: Georgia, 'Times New Roman', serif;
+  color-scheme: light;
+}
+html, body { overflow-x: hidden; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 19px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--ink); }
+a:hover { color: var(--green); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--masters); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { text-wrap: balance; }
+
+/* shared chrome */
+.site header a[href="index.html#start"], .site header a[href="#start"] { white-space: nowrap; }
+.wrap { max-width: 1100px; margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); box-sizing: border-box; }
+.wrap.narrow { max-width: 780px; }
+
+/* lesson pages */
+.lesson-hero { background: var(--paper-2); border-bottom: 2.5px solid var(--ink); }
+.lesson-hero .wrap { padding-block: 56px 64px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-size: 15px; font-weight: 700; color: var(--ink-3); }
+.crumbs a { color: var(--ink-3); }
+.pill { display: inline-block; padding: 6px 14px; border-radius: 999px; background: var(--track, var(--ink)); color: #FFFFFF; font-size: 14px; font-weight: 800; letter-spacing: 0.04em; }
+.lesson-hero h1 { margin: 0; font-weight: 900; font-size: clamp(38px, 6vw, 64px); line-height: 1.02; letter-spacing: -0.03em; max-width: 900px; }
+.lesson-hero .original { font-size: 15px; font-weight: 700; color: var(--ink-3); }
+
+.lesson { padding-block: 56px 96px; display: flex; flex-direction: column; gap: 18px; }
+.lesson > * { margin: 0; }
+.lesson h2 { font-weight: 900; font-size: 30px; line-height: 1.15; letter-spacing: -0.02em; margin-top: 30px; }
+.lesson h3 { font-weight: 800; font-size: 22px; line-height: 1.25; margin-top: 12px; }
+.lesson p, .lesson li { color: var(--ink-2); }
+.lesson strong { color: var(--ink); }
+.lesson ul, .lesson ol { padding-left: 26px; display: flex; flex-direction: column; gap: 8px; margin: 0; }
+.lesson li > ul, .lesson li > ol { margin-top: 8px; }
+.lesson blockquote { margin: 0; padding: 18px 22px; background: var(--paper-2); border-radius: 12px; }
+.lesson .scripture { background: var(--cream); border: 1.5px solid var(--rule); border-radius: 12px; padding: 20px 24px; font-family: var(--serif); font-size: 20px; line-height: 2; color: var(--ink); }
+.lesson .scripture strong { font-family: var(--body); font-size: 15px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--track, var(--ink)); display: block; line-height: 1.4; margin-bottom: 4px; }
+.blank { display: inline-block; height: 1.1em; vertical-align: -0.25em; border-bottom: 2px solid var(--ink); margin: 0 2px; max-width: 60%; }
+.howto { display: flex; flex-direction: column; gap: 4px; padding: 18px 22px; background: #FFF8D6; border-radius: 12px; font-size: 17px; }
+.howto span { color: var(--ink-2); }
+.media { display: flex; flex-wrap: wrap; gap: 12px; padding: 18px 0; }
+.media-link { display: inline-block; padding: 14px 20px; border: 2px solid var(--ink); border-radius: 10px; font-weight: 800; text-decoration: none; }
+.media-link.alt { border-color: var(--rule); background: var(--paper-2); }
+.pager { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 40px !important; padding-top: 28px; border-top: 2px solid var(--rule); }
+.pager a { display: flex; flex-direction: column; gap: 2px; padding: 18px 20px; border: 2px solid var(--ink); border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 18px; line-height: 1.3; }
+.pager a span { font-size: 13px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.pager .next { text-align: right; }
+
+/* phone */
+@media (max-width: 720px) {
+  body { font-size: 17px; }
+  .site header nav a { padding: 8px 8px !important; font-size: 15px; }
+  .home h1 { font-size: 42px !important; }
+  .home h1 svg[aria-label="location pin"] { width: 30px; height: 40px; }
+  .home h2 { font-size: 34px !important; }
+  .home section[style*="padding"], .home section > div[style*="padding"] { padding-top: 56px !important; padding-bottom: 56px !important; }
+  .home [aria-label="A peek at a lesson"] { padding-top: 150px !important; }
+  .home [aria-label="A peek at a lesson"] > div > div:first-child { padding: 28px 22px !important; box-shadow: 6px 6px 0 var(--ink) !important; }
+  .home [aria-label="A peek at a lesson"] > div > div:nth-child(2) { right: 4px !important; top: -132px !important; width: 200px !important; padding: 18px 18px 22px !important; font-size: 24px !important; }
+  .home #letter > div > div { padding: 28px 20px !important; }
+  .home #letter > div > div > div { padding-left: 0 !important; padding-right: 0 !important; }
+  .home #letter > div > div > div:last-child { border-left: 0 !important; border-top: 2px solid #CFC3A8; padding-top: 24px !important; margin-top: 16px; }
+  .home footer > div { padding-top: 56px !important; }
+  .lesson-hero .wrap { padding-block: 40px 44px; }
+  .lesson .scripture { font-size: 18px; padding: 16px 18px; }
+  .pager { grid-template-columns: minmax(0, 1fr); }
+  .pager .next { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
