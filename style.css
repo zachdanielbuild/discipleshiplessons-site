@@ -58,6 +58,20 @@ h1, h2, h3 { text-wrap: balance; }
 .pager a span { font-size: 13px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
 .pager .next { text-align: right; }
 
+/* who should I disciple: tree + your few */
+.strategy { margin: 0 0 12px; display: flex; flex-direction: column; gap: 14px; }
+.strategy-card { background: var(--paper); border: 2.5px solid var(--ink); border-radius: 14px; overflow: hidden; box-shadow: 8px 8px 0 var(--ink); max-width: 560px; }
+.strategy figcaption { color: var(--ink-3); font-size: 17px; max-width: 600px; }
+.yourfew { background: #FFF8D6; border-radius: 14px; padding: 26px 26px 22px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+.yourfew h2 { margin: 0 !important; font-family: var(--hand); font-size: 40px !important; font-weight: 700 !important; letter-spacing: 0 !important; }
+.yourfew p { margin: 0; }
+.yourfew-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.yourfew label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.yourfew input { font: 700 26px/1.2 var(--hand); color: var(--ink); background: transparent; border: 0; border-bottom: 2px solid var(--ink); padding: 6px 2px; min-width: 0; }
+.yourfew input::placeholder { font: 500 16px var(--body); color: #77746A; text-transform: none; letter-spacing: 0; }
+.yourfew input:focus-visible { outline: 3px solid var(--masters); outline-offset: 2px; }
+.yourfew-note { font-size: 14px; color: var(--ink-3); }
+
 /* phone */
 @media (max-width: 720px) {
   body { font-size: 17px; }
@@ -76,6 +90,8 @@ h1, h2, h3 { text-wrap: balance; }
   .lesson-hero .wrap { padding-block: 40px 44px; }
   .lesson .scripture { font-size: 18px; padding: 16px 18px; }
   .pager { grid-template-columns: minmax(0, 1fr); }
+  .yourfew-fields { grid-template-columns: minmax(0, 1fr); }
+  .strategy-card { box-shadow: 5px 5px 0 var(--ink); }
   .pager .next { text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
