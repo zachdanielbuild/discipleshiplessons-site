@@ -127,6 +127,46 @@ input.blank:focus-visible { outline: 3px solid var(--masters); outline-offset: 2
 .yourfew input:focus-visible { outline: 3px solid var(--masters); outline-offset: 2px; }
 .yourfew-note { font-size: 14px; color: var(--ink-3); }
 
+
+/* plan cards (Gospel of John) */
+.plan-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 22px; padding: 4px 8px 8px 0; }
+.plan-card { display: flex; flex-direction: column; gap: 12px; padding: 24px; background: #FFFFFF; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 8px 8px 0 var(--ink); min-width: 0; }
+.plan-card > * { margin: 0; }
+.plan-head { display: flex; align-items: center; gap: 12px; }
+.plan-letter { width: 48px; height: 48px; border-radius: 12px; background: var(--ink); color: var(--marker); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 28px; }
+.plan-opt { font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.plan-card h3 { font-weight: 900; font-size: 22px; line-height: 1.2; margin: 0 !important; }
+.plan-card > div:not(.plan-head) { display: flex; flex-direction: column; gap: 2px; font-size: 17px; color: var(--ink-2); }
+.plan-card > div:not(.plan-head) > span { font-size: 13px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.plan-card .dur { padding: 12px 14px; background: var(--marker); border-radius: 10px; color: var(--ink); font-weight: 900; font-size: 19px; }
+.plan-card .dur > span { color: var(--ink); }
+.plan-card .sched { padding: 12px 14px; background: var(--paper-2); border-radius: 10px; }
+.plan-card .sched ul { margin: 4px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 3px; font-size: 16px; }
+/* discussion and prayer questions */
+.qlabel { margin-bottom: -8px !important; }
+ol.questions { margin: 0; padding: 18px 22px 18px 44px; background: var(--paper-2); border-radius: 12px; display: flex; flex-direction: column; gap: 8px; }
+ol.questions.big { background: none; padding: 0 0 0 26px; gap: 14px; font-size: 20px; }
+ol.questions.big li { padding-left: 6px; color: var(--ink); }
+/* clear answers */
+.clear-answers { align-self: flex-start; background: none; border: 0; padding: 6px 0; font: inherit; font-size: 15px; font-weight: 700; color: var(--ink-3); text-decoration: underline; cursor: pointer; }
+.lesson > .clear-answers { margin-left: 84px; }
+/* freedom overview rows */
+.rows.inventories { margin-top: 8px; max-width: 760px; }
+/* foundations: collapsible stages on phones */
+.stop-card details > summary { list-style: none; cursor: default; }
+.stop-card details > summary::-webkit-details-marker { display: none; }
+.stop-card .toggle { display: none; }
+
+/* homepage sample card */
+.card-why { font-family: var(--serif); font-size: 19px; line-height: 1.5; color: var(--ink); padding: 14px 18px; background: var(--cream); border-radius: 10px; }
+.card-why b { font-family: var(--body); }
+.card-steps { display: flex; flex-wrap: wrap; gap: 6px; }
+.card-step { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 4px; border: 2px solid var(--ink); border-radius: 999px; font-size: 13px; font-weight: 800; background: #FFFFFF; }
+.card-step b { width: 22px; height: 22px; border-radius: 50%; background: #1B4FA0; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; }
+.card-step.on { background: var(--marker); }
+.card-scripture { padding: 16px 20px; background: var(--cream); border: 2.5px solid var(--ink); border-radius: 12px; box-shadow: 5px 5px 0 var(--ink); margin-right: 5px; font-family: var(--serif); font-size: 19px; line-height: 2; }
+.card-ref { font-family: var(--body); font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #1B4FA0; line-height: 1.4; }
+
 /* phone */
 @media (max-width: 720px) {
   .site header { flex-wrap: wrap !important; padding-top: 14px !important; padding-bottom: 14px !important; }
@@ -156,6 +196,17 @@ input.blank:focus-visible { outline: 3px solid var(--masters); outline-offset: 2
   .steps { flex-wrap: nowrap; overflow-x: auto; margin-inline: -16px; padding: 2px 16px 6px; }
   .steps a { flex: 0 0 auto; }
   .lesson { padding-block: 28px 48px; gap: 32px; }
+  .lesson > .clear-answers { margin-left: 0; }
+  .plan-card { box-shadow: 5px 5px 0 var(--ink); padding: 18px; }
+  ol.questions { padding: 14px 16px 14px 36px; }
+  ol.questions.big { font-size: 18px; }
+  .stop-card details > summary { cursor: pointer; display: flex; flex-direction: column; gap: 8px; }
+  .stop-card .toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 800; color: var(--ink); text-decoration: underline; }
+  .stop-card details[open] .toggle .more, .stop-card details:not([open]) .toggle .less { display: none; }
+  .home h1 svg[style*="z-index: -1"] { width: 170px; height: auto; bottom: -24px !important; }
+  .card-step { font-size: 12px; padding: 3px 7px 3px 3px; }
+  .card-step b { width: 18px; height: 18px; font-size: 11px; }
+  .card-why { font-size: 17px; }
   .lesson > .howto, .lesson > .pager, .lesson > .original, .lesson > .strategy, .lesson > .yourfew, .lesson > p, .lesson > ul, .lesson > ol { margin-left: 0; }
   .trail { gap: 36px; }
   .trail::before { left: 19px; }
@@ -186,10 +237,14 @@ input.blank:focus-visible { outline: 3px solid var(--masters); outline-offset: 2
 html { scroll-behavior: smooth; }
 
 /* print: the styled two-page version */
-@page { size: letter; margin: 0.6in 0.75in 0.7in; }
+@page { size: letter; margin: 0.55in 0.7in 0.75in;
+  @bottom-left { content: "DiscipleshipLessons"; font: 600 8.5pt Figtree, sans-serif; color: #555555; }
+  @bottom-right { content: "discipleshiplessons.com  ·  Page " counter(page) " of " counter(pages); font: 600 8.5pt Figtree, sans-serif; color: #555555; } }
 @media print {
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  html, body { background: #FFFFFF; font-size: 11.5pt; }
+  html, body { background: #FFFFFF; font-size: 10.5pt; line-height: 1.42; }
+  .clear-answers, .print-head { display: none !important; }
+  .lesson-hero h1 .hl, .vision-box .why { background: linear-gradient(transparent 56%, var(--marker) 56%); padding: 0 2px; }
   .site header, .site footer, .steps, .print-btn, .pager, .original, .howto + .howto, .media { display: none !important; }
   .print-only { display: block; }
   .print-head { margin: 0 !important; padding-bottom: 8px; border-bottom: 2px solid var(--ink); font-size: 10pt; font-weight: 700; color: var(--ink-3); }
@@ -199,24 +254,28 @@ html { scroll-behavior: smooth; }
   .hero-main { gap: 8px; }
   .lesson-hero .crumbs, .progress { display: none; }
   .pill { background: none; color: var(--ink); border: 1.5px solid var(--ink); padding: 3px 12px; font-size: 10pt; }
-  .lesson-hero h1 { font-size: 28pt; }
+  .lesson-hero h1 { font-size: 26pt; }
   .vision-box { margin: 12px 6px 6px 0; padding: 14px 18px; font-size: 13.5pt; border-width: 3px; box-shadow: 6px 6px 0 var(--ink); break-inside: avoid; }
-  .lesson { padding: 0; gap: 14px; max-width: none; }
+  .lesson { padding: 0; gap: 10px; max-width: none; }
   .lesson > .howto { margin: 0; padding: 0; background: none; font-size: 9.5pt; display: block; }
   .lesson > .howto strong::after { content: ": "; }
   .lesson > * { margin-left: 0 !important; }
-  .trail { gap: 14px; }
+  .trail { gap: 10px; }
   .trail::before { display: none; }
   .step { display: block; }
   .step .marker { display: none; }
-  .step-body { gap: 10px; padding: 0; }
-  .step-body h2 { counter-increment: sec; display: flex; align-items: center; gap: 10px; font-size: 16pt; break-after: avoid; }
+  .step-body { gap: 7px; padding: 0; }
+  .step-body ul, .step-body ol { gap: 3px; }
+  ol.questions { background: none; padding: 0 0 0 22px; gap: 3px; }
+  .plan-cards { display: block; padding: 0; } .plan-card { box-shadow: none; border-width: 1.5px; padding: 8px 12px; margin-bottom: 8px; gap: 4px; font-size: 9.5pt; } .plan-card > div:not(.plan-head) { font-size: 9.5pt; display: block; } .plan-card > div:not(.plan-head) > span { display: inline; font-size: 8pt; margin-right: 4px; } .plan-card .dur { padding: 2px 8px; font-size: 10pt; } .plan-card .sched ul { display: block; columns: 2; } .plan-head { display: none; } .plan-card h3 { font-size: 12pt; }
+  .stop-card { box-shadow: none !important; break-inside: avoid; } .stops::before { display: none; } .stop .marker { display: none; } .foundations { padding: 0; } .stops { gap: 12px; }
+  .step-body h2 { counter-increment: sec; display: flex; align-items: center; gap: 10px; font-size: 14.5pt; break-after: avoid; margin-top: 6px !important; }
   .step-body h2::before { content: counter(sec); flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 11pt; }
   .step-body h2::after { content: ""; flex: 1 1 auto; border-top: 2.5px solid var(--ink); }
   .trail { counter-reset: sec; }
   .step-body p, .step-body li { color: var(--ink); }
   .vision-lead { font-size: 11.5pt; }
-  .step-body .scripture { font-size: 12pt; line-height: 2; padding: 10px 14px; border-width: 2.5px; box-shadow: 5px 5px 0 var(--ink); margin: 0 5px 5px 0 !important; break-inside: avoid; }
+  .step-body .scripture { font-size: 11pt; line-height: 1.85; padding: 8px 12px; border-width: 2.5px; box-shadow: 5px 5px 0 var(--ink); margin: 0 5px 5px 0 !important; break-inside: avoid; }
   .step-body .scripture strong { color: var(--ink); font-size: 9pt; }
   input.blank { color: var(--ink); border-bottom-width: 1.5px; }
   .print-notes { margin: 8px 0 0 !important; break-inside: avoid; }
@@ -225,3 +284,7 @@ html { scroll-behavior: smooth; }
   .lesson-hero h1 span { background: linear-gradient(transparent 58%, var(--marker) 58%); }
   a { color: var(--ink); text-decoration: none; }
 }
+.stop-inner { display: flex; flex-direction: column; gap: 18px; margin-top: 18px; }
+.stop-inner > * { margin: 0; }
+@media (max-width: 720px) { .stop-inner { gap: 14px; margin-top: 14px; } }
+@media print { .stop-card details > summary .toggle { display: none; } }
