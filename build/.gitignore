@@ -1,0 +1,5 @@
+site/*.html
+site/_redirects
+site/robots.txt
+site/sitemap.xml
+__pycache__/
