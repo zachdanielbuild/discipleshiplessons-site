@@ -8,4 +8,4 @@
 # Corrected spelling, same page
 /john-wesleys-22-accountability-questions  /john-wesleys-22-accountability-questoins  200
 # Keep the build kit off the public site
-/build/*  /404  404
+/build/*  /page-not-found  302

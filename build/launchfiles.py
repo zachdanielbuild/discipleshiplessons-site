@@ -11,7 +11,7 @@ open(S+'_redirects','w').write('''# Old Squarespace addresses
 # Corrected spelling, same page
 /john-wesleys-22-accountability-questions  /john-wesleys-22-accountability-questoins  200
 # Keep the build kit off the public site
-/build/*  /404  404
+/build/*  /page-not-found  302
 ''')
 open(S+'robots.txt','w').write('User-agent: *\nAllow: /\nSitemap: https://www.discipleshiplessons.com/sitemap.xml\n')
 pages=sorted(f[:-5] for f in os.listdir(S) if f.endswith('.html') and f not in('404.html',))
