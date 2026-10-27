@@ -84,6 +84,12 @@ input.blank:focus-visible { outline: 3px solid var(--masters); outline-offset: 2
 .pager .next:hover { color: #FFFFFF; }
 .print-only { display: none; }
 
+.lesson > .pre { margin-left: 84px; display: flex; flex-direction: column; gap: 16px; }
+.lesson > .pre > * { margin: 0; }
+.lesson > .pre p, .lesson > .pre li { color: var(--ink-2); }
+.lesson > .pre ul, .lesson > .pre ol { padding-left: 26px; display: flex; flex-direction: column; gap: 8px; }
+.lesson > .pre .strategy, .lesson > .pre .yourfew { margin-bottom: 16px; }
+
 /* foundations page */
 .foundations { max-width: 1000px; padding-block: 72px 96px; }
 .stops::before { left: 27px; top: 60px; bottom: 140px; }
@@ -196,7 +202,7 @@ ol.questions.big li { padding-left: 6px; color: var(--ink); }
   .steps { flex-wrap: nowrap; overflow-x: auto; margin-inline: -16px; padding: 2px 16px 6px; }
   .steps a { flex: 0 0 auto; }
   .lesson { padding-block: 28px 48px; gap: 32px; }
-  .lesson > .clear-answers { margin-left: 0; }
+  .lesson > .clear-answers, .lesson > .pre { margin-left: 0; }
   .plan-card { box-shadow: 5px 5px 0 var(--ink); padding: 18px; }
   ol.questions { padding: 14px 16px 14px 36px; }
   ol.questions.big { font-size: 18px; }
