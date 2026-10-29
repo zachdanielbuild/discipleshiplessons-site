@@ -481,3 +481,8 @@ html { scroll-behavior: smooth; }
   .fd-card, .fd-band, .fd-part-card { box-shadow: none; }
   .fd-stop, .fd-part { break-inside: avoid; }
 }
+
+/* lesson actions: print + text this lesson */
+.lesson-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 720px) { .lesson-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; } .lesson-actions .print-btn { padding: 12px 6px; font-size: 15px; gap: 6px; white-space: nowrap; } .lesson-actions .print-btn svg { width: 17px; height: 17px; } }
+@media print { .lesson-actions { display: none !important; } }

@@ -297,6 +297,7 @@ def layout(i,x):
 # ---------- v2: Option A trail layout ----------
 def blanks(x):
     return re.sub(r'_{3,}',lambda m:f'<input type="text" class="blank" aria-label="Fill in the blank" autocomplete="off" style="width:{min(10,max(3,len(m.group(0))*0.32))+1.2:.1f}em">',x)
+SHARE_BTN='<button type="button" class="print-btn share-btn" data-title="{title}" data-label="{label}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg><span>{label}</span></button><script>(function(){{var b=document.currentScript.previousElementSibling;var s=b.querySelector("span");var canShare=!!navigator.share&&matchMedia("(pointer: coarse)").matches;if(!canShare)s.textContent="Copy link to send";b.addEventListener("click",function(){{var url=location.origin+location.pathname;var t=b.getAttribute("data-title");if(canShare){{navigator.share({{title:t,text:"Here is the lesson for when we meet: "+t,url:url}}).catch(function(){{}});return;}}function done(){{s.textContent="Link copied!";setTimeout(function(){{s.textContent="Copy link to send";}},2200);}}if(navigator.clipboard&&navigator.clipboard.writeText){{navigator.clipboard.writeText(url).then(done,function(){{prompt("Copy this link:",url);}});}}else{{prompt("Copy this link:",url);}}}});}})();</script>'
 PRINT_ICON='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3h10v6"></path><rect x="3" y="9" width="18" height="8" rx="2"></rect><path d="M7 14h10v7H7z"></path></svg>'
 ARROW='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>'
 CHECK='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>'
@@ -428,7 +429,7 @@ def page(i):
 <span class="pill">{html.escape(eyebrow)}</span>
 <h1>{html.escape(t)}</h1>
 {progress}
-<button type="button" class="print-btn" onclick="window.print()">{PRINT_ICON}{'Print this lesson' if is_lesson else 'Print this page'}</button>
+<div class="lesson-actions"><button type="button" class="print-btn" onclick="window.print()">{PRINT_ICON}{'Print this lesson' if is_lesson else 'Print this page'}</button>{SHARE_BTN.format(label='Text this lesson' if is_lesson else 'Text this page', title=html.escape(t, quote=True)) }</div>
 </div>
 {vbox}
 </div>
