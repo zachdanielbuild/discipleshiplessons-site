@@ -486,3 +486,14 @@ html { scroll-behavior: smooth; }
 .lesson-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 @media (max-width: 720px) { .lesson-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; } .lesson-actions .print-btn { padding: 12px 6px; font-size: 15px; gap: 6px; white-space: nowrap; } .lesson-actions .print-btn svg { width: 17px; height: 17px; } }
 @media print { .lesson-actions { display: none !important; } }
+
+/* wordmark: DiscipleshipLessons.com fits beside the menu button on phones */
+@media (max-width: 720px) {
+  .site header { flex-wrap: nowrap !important; }
+  .site header > a:first-child { min-width: 0; gap: 8px !important; }
+  .site header > a:first-child svg { width: 34px; height: 34px; flex: none; }
+  .site header > a:first-child span { font-size: 18px !important; white-space: nowrap; }
+  .site header.open { flex-wrap: wrap !important; }
+}
+@media (max-width: 380px) { .site header > a:first-child span { font-size: 16px !important; } .site header > a:first-child svg { width: 28px; height: 28px; } }
+@media (max-width: 340px) { .site header > a:first-child span { font-size: 14.5px !important; } }
