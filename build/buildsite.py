@@ -149,6 +149,15 @@ footer=footer.replace('href="#start"','href="index.html#start"')
 inner=H[H.index('<x-dc>')+6:H.index('</x-dc>')]
 inner=re.sub(r'<helmet>.*?</helmet>','',inner,flags=re.S)
 FONTS='<link rel="icon" href="favicon.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="apple-touch-icon.png">\n<meta name="theme-color" content="#FFFFFF">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800;900&family=Caveat:wght@500;700&display=swap" rel="stylesheet">'
+# homepage order: hero, sample lesson, lesson sets (tabs), testimonials, postcard, questions, closing
+from homesets import sets_section
+def _cut(s,start,end):
+    i=s.index(start); j=s.index(end,i); return s[i:j]
+_m=['<section id="top"','<section aria-label="A peek at a lesson"','<section id="letter"','<section id="start"','<section id="path"','<section aria-label="By the numbers"','<section aria-label="What people say"','<section id="faq"','<footer']
+_pos=[inner.index(m) for m in _m]
+assert _pos==sorted(_pos),'homepage sections moved'
+_seg={m:inner[a:b] for m,a,b in zip(_m,_pos,_pos[1:]+[len(inner)])}
+inner=(inner[:_pos[0]]+_seg[_m[0]]+_seg[_m[1]]+sets_section(slug)+'\n\n'+_seg[_m[6]]+_seg[_m[2]]+_seg[_m[7]]+inner[inner.index('<footer'):])
 # ---------- index ----------
 idx=f'''<title>DiscipleshipLessons</title>
 {FONTS}
