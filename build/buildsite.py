@@ -341,6 +341,28 @@ def restructure(i,secs):
     if i==6:
         m=re.search(r'<p>(Why\?.*?)</p>',secs[0][1])
         if m: vision=m.group(1); secs[0][1]=secs[0][1].replace(m.group(0),'',1)
+    # New Believers: Connection first, then a Vision section built from each lesson's own vision sentence
+    if info[i]['track']=='new-believers' and secs and secs[0][0]=='Connection':
+        CATCH='<p>As you get started, catch up on how y’all are doing since you last met. Celebrate how God has been at work in your lives.</p>'
+        FIRST='<p>As you get started, take a few minutes to catch up and hear how they are doing.</p>'
+        NBV={7:(1,'<p>God loves you and wants you to experience peace and life—abundant and eternal.</p>'),
+             8:(1,'<p>Like the blind man healed by Jesus, we each have a powerful testimony in Jesus.</p>'),
+             9:(1,'<p>Water Baptism is an important step of obedience in your discipleship to Jesus.</p>'),
+             10:(1,'<p>God has rescued you from darkness and brought you into His kingdom. This transfer of kingdoms is central to understanding deliverance.</p>')}
+        conn=secs[0][1]
+        if i in NBV:
+            k,snip=NBV[i]; assert snip in secs[k][1],(i,'vision sentence moved')
+            secs[k][1]=secs[k][1].replace(snip,'',1); vtxt=snip[3:-4]
+        elif i==11:
+            a='<p>This lesson will help you experience baptism in the Holy Spirit. '
+            assert conn.startswith(a),(i,'connection text changed')
+            vtxt=conn[len(a):conn.index('</p>')]; conn='<p>This lesson will help you experience baptism in the Holy Spirit.</p>'+conn[conn.index('</p>')+4:]
+        elif i==12:
+            m=re.match(r'<p>(.*?)</p>',conn); vtxt=m.group(1); conn=conn[m.end():]
+        else:
+            vtxt=None
+        secs[0][1]=(FIRST if i==7 else CATCH)+conn
+        if vtxt: secs.insert(1,['Vision',f'<p class="vision-lead">{vtxt}</p>'])
     if info[i]['track'] in ('look-up','look-in','look-out') and any(s[0]=='Biblical Foundations' for s in secs):
         bf=[s for s in secs if s[0]=='Biblical Foundations'][0]
         m=re.match(r'<p>(.*?)</p>',bf[1])
