@@ -23,7 +23,7 @@ TITLES={1:'Devoted to Worship',2:'Vision for a Vibrant Relationship with the Lor
  7:'The Gospel',8:'Your Testimony',9:'Water Baptism',10:'Deliverance',11:'Baptism in the Holy Spirit',12:'Church Membership',
  14:'Growing Into Our New Life in Christ',15:'Confession',16:'Repentance',17:'Replace',18:'Restore',
  19:'Your Identity as a Witness and Ambassador',20:'Your Sphere of Influence',21:'Sharing the Gospel with Confidence',22:'Making Disciples Who Make Disciples',
- 6:'Gospel of John Discovery Study',23:'Going Deeper in Discipleship',24:'Freedom Prayer Experience',32:'Tending Your Heart',33:"John Wesley's 22 Questions",34:'Plan Your Next Season of Discipleship',35:'Discipleship Foundations',36:'Disciplemaking Stories',37:'Who Should I Disciple?'}
+ 6:'Gospel of John Discovery Study',23:'Going Deeper in Discipleship',24:'Freedom Prayer Experience',32:'Tending Your Heart',33:"John Wesley's 22 Questions",34:'Further Growth Planning Guide',35:'Discipleship Foundations',36:'Disciplemaking Stories',37:'Who Should I Disciple?'}
 for i in range(25,32): TITLES[i]=items[i]['title'].split(': ',1)[1]
 info={}
 for key,name,color,ids in TRACKS:
@@ -497,6 +497,8 @@ def foundations():
     S.append(stop('look-in','4','#B4561C','Look In','This set of discipleship lessons are designed to be done with a growing disciple after completing Look Up. Look In lays the foundations for a lifestyle of holiness, love and Christlike character.','Lessons:',[14,15,16,17,18],['Our New Life in Christ','Confession - Agreeing with God’s Truth','Repentance - Turning Away from Sin','Replacement - Weeding and Feeding','Restoration - Living in Holiness and Love'],'Experiences in:',[('Freedom Prayer Experience','the-freedom-prayer-experience.html')],part='Part 2:'))
     S.append(stop('look-out','5','#1B4FA0','Look Out','This set of discipleship lessons are designed to be done with a growing disciple after completing Look Up and Look In. Look Out lays the foundation for a Great Commission lifestyle.','Lessons:',[19,20,21,22],['Your Identity as a Witness and Ambassador','Your Sphere of Influence','Sharing the Gospel with Confidence','Making Disciples Who Make Disciples'],part='Part 3:'))
     S.append(f'<section class="stop next-stop" id="next"><span class="marker pin" aria-hidden="true">{PIN.format(w=36,h=48)}</span><div class="stop-card dark"><h2>What’s Next?</h2><p>When you finish these foundations, you might be asking “what’s next?” Here are some good next steps in discipleship.</p><a class="btn-yellow" href="going-deeper-in-discipleship.html">What’s Next{ARROW}</a></div></section>')
+    from foundpage import body as _fd
+    FD_HERO,FD_MAIN,FD_SCRIPT=_fd(slug,ARROW)
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -511,31 +513,18 @@ def foundations():
 <div class="site">
 {header}
 <main>
-<section class="lesson-hero">
-<div class="wrap">
-<div class="hero-main">
-<nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a></nav>
-<span class="pill">Guides</span>
-<h1>Discipleship Foundations</h1>
-<p class="hero-lead">Jesus calls all of us to make disciples (Matthew 28). These lessons can help you fulfill that calling.</p>
-</div>
-</div>
-</section>
-<div class="wrap foundations">
-<div class="trail stops">
-{''.join(S)}
-</div>
-</div>
+{FD_HERO}
+{FD_MAIN}
 </main>
 {footer}
 </div>
-<script>(function(){{var m=window.matchMedia('(max-width: 720px)');document.querySelectorAll('.stop-card details').forEach(function(d){{if(m.matches&&location.hash.slice(1)!==d.closest('.stop').id)d.open=false;d.querySelector('summary').addEventListener('click',function(e){{if(!m.matches)e.preventDefault();}});}});window.addEventListener('beforeprint',function(){{document.querySelectorAll('.stop-card details').forEach(function(d){{d.open=true;}});}});}})();</script>
+{FD_SCRIPT}
 </body>
 </html>
 '''
 
 files=[]
 for i in info:
-    fn=slug(i)+'.html'; open(OUT+fn,'w').write(foundations() if i==35 else page(i)); files.append(fn)
+    fn=slug(i)+'.html'; open(OUT+fn,'w').write((foundations() if i==35 else page(i)).replace('Discipleship Planning Guide','Further Growth Planning Guide')); files.append(fn)
 json.dump(files,open(D+'site_files.json','w'))
 print(len(files),'pages')
