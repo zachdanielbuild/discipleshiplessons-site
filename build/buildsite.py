@@ -159,7 +159,7 @@ assert _pos==sorted(_pos),'homepage sections moved'
 _seg={m:inner[a:b] for m,a,b in zip(_m,_pos,_pos[1:]+[len(inner)])}
 inner=(inner[:_pos[0]]+_seg[_m[0]]+_seg[_m[1]]+sets_section(slug)+'\n\n'+_seg[_m[6]]+_seg[_m[2]]+_seg[_m[7]]+inner[inner.index('<footer'):])
 # ---------- index ----------
-idx=f'''<title>DiscipleshipLessons</title>
+idx=f'''<title>DiscipleshipLessons.com</title>
 {FONTS}
 <link rel="stylesheet" href="style.css">
 <div class="site home">
@@ -194,7 +194,7 @@ def page(i):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{html.escape(t)} | DiscipleshipLessons</title>
+<title>{html.escape(t)} | DiscipleshipLessons.com</title>
 {FONTS}
 <link rel="stylesheet" href="style.css">
 </head>
@@ -428,13 +428,13 @@ def page(i):
         fp=re.search(r'<p>(.*?)</p>',bodyhtml); desc=re.sub(r'<[^>]+>','',fp.group(1)) if fp else t
     desc=html.unescape(desc).strip()
     if len(desc)>200: desc=desc[:197].rsplit(' ',1)[0]+'...'
-    meta=share_meta(t+' | DiscipleshipLessons',desc,slug(i))
+    meta=share_meta(t+' | DiscipleshipLessons.com',desc,slug(i))
     return f'''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{html.escape(t)} | DiscipleshipLessons</title>
+<title>{html.escape(t)} | DiscipleshipLessons.com</title>
 {meta}
 {FONTS}
 <link rel="stylesheet" href="style.css">
@@ -481,7 +481,7 @@ def share_meta(title,desc,path):
     return f'''<meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="DiscipleshipLessons">
+<meta property="og:site_name" content="DiscipleshipLessons.com">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{url}">
@@ -527,8 +527,8 @@ def foundations():
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Discipleship Foundations | DiscipleshipLessons</title>
-{share_meta('Discipleship Foundations | DiscipleshipLessons','Jesus calls all of us to make disciples (Matthew 28). These lessons can help you fulfill that calling.','discipleship-foundation-lessons')}
+<title>Discipleship Foundations | DiscipleshipLessons.com</title>
+{share_meta('Discipleship Foundations | DiscipleshipLessons.com','Jesus calls all of us to make disciples (Matthew 28). These lessons can help you fulfill that calling.','discipleship-foundation-lessons')}
 {FONTS}
 <link rel="stylesheet" href="style.css">
 </head>

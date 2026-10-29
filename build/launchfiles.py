@@ -20,7 +20,7 @@ open(S+'sitemap.xml','w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset
 # 404 page from a lesson page's chrome
 t=open(S+'discipleship-foundation-lessons.html').read()
 head=t[:t.index('<main>')]; foot=t[t.index('</main>'):]
-head=re.sub(r'<title>.*?</title>','<title>Page not found | DiscipleshipLessons</title>',head)
+head=re.sub(r'<title>.*?</title>','<title>Page not found | DiscipleshipLessons.com</title>',head)
 head=re.sub(r'<meta name="description"[^>]*>\n<link rel="canonical"[^>]*>\n(<meta property[^>]*>\n|<meta name="twitter[^>]*>\n?)*','',head)
 foot=re.sub(r'<script>.*?</script>\n','',foot,flags=re.S)
 body='''<main>

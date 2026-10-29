@@ -17,8 +17,8 @@ d='Simple and powerful lessons to help you make disciples in your sphere of infl
 meta=f'''<meta name="description" content="{e(d)}">
 <link rel="canonical" href="https://www.discipleshiplessons.com/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="DiscipleshipLessons">
-<meta property="og:title" content="DiscipleshipLessons">
+<meta property="og:site_name" content="DiscipleshipLessons.com">
+<meta property="og:title" content="DiscipleshipLessons.com">
 <meta property="og:description" content="{e(d)}">
 <meta property="og:url" content="https://www.discipleshiplessons.com/">
 <meta property="og:image" content="https://www.discipleshiplessons.com/share.png">
