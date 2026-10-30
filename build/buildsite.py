@@ -595,7 +595,7 @@ REFINE={
  'in-jerusalem':[('His witness and ambassadors','His witnesses and ambassadors'),('What are some “areas of influence” has God assigned to you?','What “areas of influence” has God assigned to you?'),
    ('find him. Yet he is actually not far from each one of us','find him. Yet he is actually not far from each one of us.'),
    ('Write their names here:</p>','Write their names here:</p>'+NAMES)],
- 'sharing-the-gospel':[('<h2>Biblical Foundations</h2><p>God has given us all a mission to be His witness and ambassadors. He has given each of us different spheres of influence where we live out that calling.</p>','<h2>Biblical Foundations</h2>')],
+ 'sharing-the-gospel':[('<p>Use the Steps to Peace With God Tract and the Two Minute Testimony Worksheet to model sharing the Gospel and sharing your testimony.</p>',''),('<h2>Biblical Foundations</h2><p>God has given us all a mission to be His witness and ambassadors. He has given each of us different spheres of influence where we live out that calling.</p>','<h2>Biblical Foundations</h2>')],
  'gospel-of-john-discovery-study':[('(John 20:31).”','(John 20:31).'),('<p>Below we outline three plans','<p class="scripture"><strong>John 20:31</strong> “But these are written that you may believe that Jesus is the Messiah, the Son of God, and that by believing you may have life in his name.”</p><p>Below we outline three plans'),('21 weeks (about a semester)','21 weeks')],
  'freedom-from-generational-sin':[('Manasseh’s worshipped','Manasseh worshipped'),
    ('(2 Chronicles</p><p>20:19)','(2 Chronicles 34:19)'),('gave him a blessing</p><p>(2 Chronicles 20.26)','gave him a blessing (2 Chronicles 34:26-28)'),
