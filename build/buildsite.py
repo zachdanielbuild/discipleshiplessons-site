@@ -125,6 +125,11 @@ for ln,h in HMAP.items():
     line=home[ln-1]; assert '<a href="' in line,(ln,line)
     home[ln-1]=re.sub(r'<a href="[^"]*"',f'<a href="{h}"',line,count=1)
 H='\n'.join(home)
+# Discipleship Roadmap PDF retired (Oct 30): drop its homepage question and footer link
+_n=len(H)
+H=re.sub(r'<div id="roadmap">.*?</div></div>\n','',H,count=1)
+H=H.replace(f'<a href="{ROADMAP}" style="text-decoration: none">The Discipleship Roadmap</a>\n','',1)
+assert 'DiscipleshipRoadmap' not in H and len(H)<_n
 # homepage sample lesson card: show the new five-part lesson format
 _card_old=H[H.index('<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: 14px; font-weight: 800; text-transform: uppercase'):H.index('<div style="position: absolute; top: -104px')]
 _blank=lambda w,c: f'<span style="display: inline-block; min-width: {w}px; border-bottom: 2px solid #1D1D1D; text-align: center; font-family: \'Caveat\', cursive; font-size: 30px; line-height: 1; color: {c}">'

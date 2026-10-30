@@ -17,6 +17,8 @@ open(S+'_redirects','w').write('''# Old Squarespace addresses
 /s/Tending-Your-Heart-Handout-2_-Hindrances-To-Hearing-God.pdf  /files/tending-your-heart-2-hindrances-to-hearing-god.pdf  301
 /s/Tending-Your-Heart-Handout-3_-Overcoming-Wounds-Lies.pdf  /files/tending-your-heart-3-overcoming-wounds-and-lies.pdf  301
 /s/Part-4-Handout-Tending-Your-Heart.pdf  /files/tending-your-heart-4-how-to-tend-your-heart.pdf  301
+# Retired Discipleship Roadmap PDF
+/s/DiscipleshipRoadmap.pdf  /discipleship-foundation-lessons  301
 # Keep the build kit off the public site
 /build/*  /page-not-found  302
 ''')
