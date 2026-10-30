@@ -4,6 +4,8 @@ import os
 D=os.path.dirname(os.path.abspath(__file__))+'/'
 OUT=D+'site/'
 items=json.load(open(D+'xml/items.json'))
+# clean addresses (Oct 30); old ones redirect in launchfiles.py
+for _k,_new in ((33,'/john-wesleys-22-questions'),(36,'/disciplemaking-stories')): items[_k]['link']=_new
 YT='https://www.youtube.com/playlist?list=PLoXSy2HiYN4tfZXlu97aZf_y_zBq3rO7E'
 ROADMAP='https://www.discipleshiplessons.com/s/DiscipleshipRoadmap.pdf'
 CHALLENGE='https://passionandpurpose.kit.com/discipleship'
@@ -30,7 +32,7 @@ for key,name,color,ids in TRACKS:
     for n,i in enumerate(ids):
         info[i]=dict(track=key,trackname=name,color=color,n=n,ids=ids)
 SLUGS={slug(i) for i in info}
-LINKFIX={'start-here':'discipleship-foundation-lessons','whats-next':'going-deeper-in-discipleship','lessons':'discipleship-foundation-lessons','devoted-to-gods-word':'church-membership','home':'index','faq':'index','whats-next-1':'whats-next-1'}
+LINKFIX={'start-here':'discipleship-foundation-lessons','whats-next':'going-deeper-in-discipleship','lessons':'discipleship-foundation-lessons','devoted-to-gods-word':'church-membership','home':'index','faq':'index','whats-next-1':'disciplemaking-stories','john-wesleys-22-accountability-questoins':'john-wesleys-22-questions'}
 def fixlink(h):
     if h.startswith('/') and not h.startswith('//'): h='https://www.discipleshiplessons.com'+h
     m=re.match(r'https?://(www\.)?discipleshiplessons\.com/([^?#]*)(.*)',h)
@@ -479,11 +481,12 @@ def page(i):
 </main>
 {footer}
 </div>
-{SAVE_JS if has_blanks else ''}
+{SAVE_JS if has_blanks else ''}{LONG_JS if 'class="long"' in bodyhtml else ''}
 </body>
 </html>
 '''
 
+LONG_JS='<script>(function(){var d=document.querySelectorAll("details.long");if(matchMedia("(max-width: 720px)").matches)d.forEach(function(e){e.open=false});addEventListener("beforeprint",function(){d.forEach(function(e){e.open=true})})})();</script>'
 SITE='https://www.discipleshiplessons.com/'
 def share_meta(title,desc,path):
     e=lambda v: html.escape(v,quote=True)
@@ -569,7 +572,7 @@ REFINE={
     '<p class="scripture"><strong>Mark 5:19-20</strong> &quot;Jesus did not let him, but said, &#x27;Go home to your own people and tell them how much the Lord has done for you, and how he has had mercy on you.&#x27; So the man went away and began to tell in the Decapolis how much Jesus had done for him. And all the people were amazed.&quot;</p>')],
  'water-baptism':[('your Lord and Savior Yes','your Lord and Savior? Yes')],
  'deliverance':[('who you are in Christ..','who you are in Christ.')],
- 'spirit-baptism':[('the Ephesians believers','the Ephesian believers'),('<em>witness</em>—boldly','<em>witness</em>: boldly')],
+ 'spirit-baptism':[('the Ephesians believers','the Ephesian believers'),('Baptism of the Holy Spirit</h2>','Baptism in the Holy Spirit</h2>'),('The baptism of the Holy Spirit however','The baptism in the Holy Spirit, however,'),('<em>witness</em>—boldly','<em>witness</em>: boldly')],
  'church-membership':[('<p>Why Membership Matters<ul>','<h3>Why Membership Matters</h3><ul>')],
  'vision-for-a-vibrant-relationship-with-the-lord':[('explain how it your relationship','explain how it shapes your relationship')],
  'devoted-to-the-word':[LOOKUP_CONN],'devoted-to-worship':[LOOKUP_CONN],'devoted-to-prayer':[LOOKUP_CONN],
@@ -581,12 +584,13 @@ REFINE={
    'One of the main ways God replaces a lifestyle of sin with a lifestyle of holiness and love is through the ministry of the Holy Spirit.'),
    ('take time to practice confession of sin. How did it go in uprooting these areas from your lives?','How has it gone partnering with God to uproot the sins you confessed?')],
  'restore':[('go through our Freedom Prayer Experience together. This experience takes the what you learned','go through our <a href="the-freedom-prayer-experience.html">Freedom Prayer Experience</a> together. This experience takes what you learned')],
- 'ambassador':[('as you these lessons','as you go through these lessons')],
+ 'ambassador':[('<p>Welcome to &quot;Look Out,&quot; a discipleship guide designed to help plant and water the seeds of a Great Commission lifestyle in the lives of God’s people.</p><p>Our hope is that as you these lessons you will develop a hunger to live on mission, and the habit of sharing your faith, making disciples, and stewarding your resources for God’s Kingdom and glory!</p>',
+   '<p>As you get started, catch up on how y’all are doing since you last met. Celebrate how God has been at work in your lives.</p><p>This is the first lesson in Look Out. Over these four lessons, our hope is that you will develop a hunger to live on mission and a habit of sharing your faith and making disciples.</p>')],
  'in-jerusalem':[('His witness and ambassadors','His witnesses and ambassadors'),('What are some “areas of influence” has God assigned to you?','What “areas of influence” has God assigned to you?'),
    ('find him. Yet he is actually not far from each one of us','find him. Yet he is actually not far from each one of us.'),
    ('Write their names here:</p>','Write their names here:</p>'+NAMES)],
  'sharing-the-gospel':[('<h2>Biblical Foundations</h2><p>God has given us all a mission to be His witness and ambassadors. He has given each of us different spheres of influence where we live out that calling.</p>','<h2>Biblical Foundations</h2>')],
- 'gospel-of-john-discovery-study':[('(John 20:31).”','(John 20:31).'),('21 weeks (about a semester)','21 weeks')],
+ 'gospel-of-john-discovery-study':[('(John 20:31).”','(John 20:31).'),('<p>Below we outline three plans','<p class="scripture"><strong>John 20:31</strong> “But these are written that you may believe that Jesus is the Messiah, the Son of God, and that by believing you may have life in his name.”</p><p>Below we outline three plans'),('21 weeks (about a semester)','21 weeks')],
  'freedom-from-generational-sin':[('Manasseh’s worshipped','Manasseh worshipped'),
    ('(2 Chronicles</p><p>20:19)','(2 Chronicles 34:19)'),('gave him a blessing</p><p>(2 Chronicles 20.26)','gave him a blessing (2 Chronicles 34:26-28)'),
    ('As we walk forward from lies into truth, medidate on Romans 5 and the generational blessing that is ours in Jesus:','As you walk forward in freedom, meditate on Romans 5 and the generational blessing that is ours in Jesus.')],
@@ -599,9 +603,9 @@ REFINE={
  'freedom-from-lies-and-deception':[('list of common areas people walked in pride in Scripture','list of common lies people believe, each with a Scripture that speaks to it'),('are currently walked in lies and deception','are currently walking in lies and deception')],
  'freedom-from-habitual-sin':[('<p>Romans 5:12“','<p>Romans 6:12-14 “'),('receive forgiveness and grace for humility','receive forgiveness and grace to walk in the Spirit'),
    ('As we release these lies','As we release these patterns'),('Galatians 5 and Mark 7.20-23)','Galatians 5 and Mark 7.20-23'),('Debauchery;','Debauchery'),('Idolatry and witchcraft;','Idolatry and witchcraft')],
- 'going-deeper-in-discipleship':[('curated activities to building on','curated activities for building on'),('laid in looking in and cultivating a Great Commission','laid in Look Out and cultivating a Great Commission')],
+ 'going-deeper-in-discipleship':[('https://www.amazon.com/product-reviews/1732625255/','https://www.amazon.com/Business-Revival-Getting-Inside-Workplace/dp/1732625255'),('<a href="https://thefreedomfight.org/">Freedom Fight</a> together.','<a href="https://thefreedomfight.org/">Freedom Fight</a> together, a faith-based program for anyone fighting pornography.'),('curated activities to building on','curated activities for building on'),('laid in looking in and cultivating a Great Commission','laid in Look Out and cultivating a Great Commission')],
  'planning-your-next-season-of-discipleship':[('Using these 6 questions at the start of any season, to put together','Use these 6 questions at the start of any season to put together'),('next season of a discipleship group:','next season with a discipleship group:')],
- 'whats-next-1':[('Kyle faithfully lead a','Kyle faithfully leads a')],
+ 'disciplemaking-stories':[('Kyle faithfully lead a','Kyle faithfully leads a')],
  'who-should-i-disciple':[('you might be asking of were do I start with them?','you might be asking where to start with them.'),
    ('without hesitation when Jesus called.','without hesitation when Jesus calls.'),('who recognized her need for a Savior rather than thinking they have','who recognizes her need for a Savior rather than thinking she has')],
  'the-freedom-prayer-experience':[('Freedom From Habitual Sins of the Flesh','Freedom From Habitual Sin')],
@@ -638,7 +642,7 @@ def passage_card(x,lead_end,ref):
     # paragraphs after a stray "—" line are one long passage -> one card
     i=x.index('<p>—</p>'); j=x.find('<h2>',i); j=len(x) if j<0 else j
     paras=re.findall(r'<p>(.*?)</p>',x[i+8:j],re.S)
-    card=f'<p class="scripture passage"><strong>{ref}</strong> '+'<br><br>'.join(paras)+'</p>'
+    card=f'<details class="long" open><summary>Read {ref}</summary><p class="scripture passage"><strong>{ref}</strong> '+'<br><br>'.join(paras)+'</p></details>'
     return x[:i]+card+x[j:]
 _body_for_fixed=body_for
 def body_for(i):
@@ -650,6 +654,10 @@ def body_for(i):
         x=passage_card(x,None,'Romans 5')
     if s=='freedom-from-idolatry':
         x=idol_cards(x); x=passage_card(x,None,'1 Thessalonians 1')
+    if s=='freedom-from-lies-and-deception':
+        a='continue in the truth found in Jesus:<ul>'; assert a in x
+        k=x.index(a)+len(a)-4; e=x.index('</ul>',k)+5
+        x=x[:k]+'<details class="long" open><summary>Read the 11 declarations of truth</summary>'+x[k:e]+'</details>'+x[e:]
     if s=='spirit-baptism':
         for lab,ref in (('New Fruit','Galatians 5:22-23'),('New Gifts','1 Corinthians 12:7')):
             x,n=re.subn(r'<p><strong>'+lab+r'-? </strong><em>'+re.escape(ref)+r' (.*?)</em></p>',f'<p class="scripture"><strong>{lab} · {ref}</strong> \\1</p>',x,flags=re.S); assert n==1,(lab)
@@ -709,6 +717,7 @@ _restructure_old=restructure
 def restructure(i,secs):
     vision,secs=_restructure_old(i,secs)
     if i in WHY: vision='Why? '+WHY[i]
+    if i==12: secs[0][1]+='<p>This lesson walks through God’s design for the church and how to become part of a local church.</p>'
     if i in SHARE:
         lead=f'<p class="vision-lead">{html.escape(SHARE[i],quote=False)}</p>'
         vs=[s for s in secs if s[0]=='Vision']

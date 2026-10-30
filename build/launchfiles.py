@@ -8,8 +8,10 @@ open(S+'_redirects','w').write('''# Old Squarespace addresses
 /home                  /                                  301
 /faq                   /#faq                              301
 /devoted-to-gods-word  /church-membership                 301
-# Corrected spelling, same page
-/john-wesleys-22-accountability-questions  /john-wesleys-22-accountability-questoins  200
+# Clean addresses (Oct 30)
+/john-wesleys-22-accountability-questoins  /john-wesleys-22-questions  301
+/john-wesleys-22-accountability-questions  /john-wesleys-22-questions  301
+/whats-next-1  /disciplemaking-stories  301
 # Keep the build kit off the public site
 /build/*  /page-not-found  302
 ''')

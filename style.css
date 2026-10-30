@@ -514,3 +514,6 @@ html { scroll-behavior: smooth; }
   .site footer a { display: inline-block; padding-block: 6px; }
   .home [aria-label="A peek at a lesson"] > div > div:first-child { padding-top: 76px !important; }
 }
+details.long > summary { cursor: pointer; font-weight: 800; text-decoration: underline; margin-bottom: 10px; }
+details.long[open] > summary { margin-bottom: 14px; }
+@media print { details.long > summary { display: none; } }
