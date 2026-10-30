@@ -732,6 +732,16 @@ def restructure(i,secs):
         else: secs.insert(1,['Vision',lead])
     return vision,secs
 
+# Pride: 1 Peter 5:5-6 replaces the borrowed Psalm 68 (Zach, Oct 30)
+_body_for_v3=body_for
+def body_for(i):
+    x=_body_for_v3(i)
+    if slug(i)=='freedom-from-pride':
+        b=lambda w: f'<input type="text" class="blank" aria-label="Fill in the blank" autocomplete="off" style="width:{w}em">'
+        new=('<p class="scripture"><strong>1 Peter 5:5-6 (NIV)</strong> “All of you, clothe yourselves with '+b(5.4)+' toward one another, because, ‘God opposes the proud but shows favor to the humble.’ Humble yourselves, therefore, under God’s mighty hand, that he may '+b(5.4)+' in due time.”</p>')
+        x,n=re.subn(r'<p class="scripture"><strong>Psalm 68:5-6 \(NIV\)</strong>.*?</p>',lambda m:new,x,count=1,flags=re.S); assert n==1
+    return x
+
 files=[]
 for i in info:
     fn=slug(i)+'.html'; open(OUT+fn,'w').write((foundations() if i==35 else page(i)).replace('Discipleship Planning Guide','Further Growth Planning Guide')); files.append(fn)
