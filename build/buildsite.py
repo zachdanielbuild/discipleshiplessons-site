@@ -742,6 +742,31 @@ def body_for(i):
         x,n=re.subn(r'<p class="scripture"><strong>Psalm 68:5-6 \(NIV\)</strong>.*?</p>',lambda m:new,x,count=1,flags=re.S); assert n==1
     return x
 
+# Inventory groups on Idolatry and Lies fold up on phones (open on laptops and in print) (Zach, Oct 30)
+_body_for_v4=body_for
+def _inv(title,inner): return f'<details class="long inv" open><summary>{title}</summary><div class="inv-body">{inner}</div></details>'
+def body_for(i):
+    x=_body_for_v4(i); s=slug(i)
+    if s=='freedom-from-idolatry':
+        x,n=re.subn(r'<h4 class="idol-head">(.*?)</h4>(.*?)(?=<h4 class="idol-head">|<h3>)',lambda m:_inv(m.group(1),m.group(2)),x,flags=re.S); assert n==5,n
+        def sp(m):
+            t,refs,ex=m.group(1).strip(),m.group(2),m.group(3).strip()
+            return _inv(t,f'<p class="examples"><strong>In Scripture:</strong> {refs}</p><p class="examples"><strong>Common examples:</strong> {ex}</p>')
+        x,n=re.subn(r'<p><strong>(\d\. [^(<]*?)\s*\(([^)]*)\)\s*</strong>Common Current Examples:\s*(.*?)</p>',sp,x,flags=re.S); assert n==5,n
+    if s=='freedom-from-lies-and-deception':
+        # the old site split these lists in two; join them so each fold holds its whole list
+        x,n=re.subn(r'</ul></details><ul>(.*?)</ul>',r'\1</ul></details>',x,count=1,flags=re.S); assert n==1
+        x=x.replace('</li></ul><ul><li>Believing the lie','</li><li>Believing the lie')
+        x,n=re.subn(r'<p><strong>(Lies (?:About God|about Life)):</strong><ul>(.*?)</ul>',lambda m:_inv(m.group(1).replace('about','About'),'<ul>'+m.group(2)+'</ul>'),x,flags=re.S); assert n==2,n
+        a=x.index('<p><strong>Fears and Anxieties Inventory: </strong></p>'); b=x.index('<p>As we identify these fears',a)
+        blk=x[a:b]
+        lies=re.findall(r'<li>(.*?)(?:</li>|</p>)',blk)
+        assert len(lies)==6,lies
+        inner=('<p>Our fears and anxieties often stem from believing lies about:</p><ul>'+''.join(f'<li>{l}</li>' for l in lies[:3])+'</ul>'
+               '<p>For example:</p><ul>'+''.join(f'<li>{l}</li>' for l in lies[3:])+'</ul>')
+        x=x[:a]+_inv('Fears and Anxieties',inner)+x[b:]
+    return x
+
 files=[]
 for i in info:
     fn=slug(i)+'.html'; open(OUT+fn,'w').write((foundations() if i==35 else page(i)).replace('Discipleship Planning Guide','Further Growth Planning Guide')); files.append(fn)

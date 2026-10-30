@@ -520,3 +520,11 @@ details.long[open] > summary { margin-bottom: 14px; }
 .pre h3.session { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 900; margin: 28px 0 6px; }
 .pre h3.session span { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; background: var(--track, var(--ink)); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; }
 .pre .session-desc { margin: 0 0 12px; }
+details.inv { border: 2px solid var(--ink); border-radius: 12px; background: #FFFFFF; padding: 0 16px; margin: 6px 0; }
+details.inv > summary { list-style: none; text-decoration: none; font-size: 18px; font-weight: 800; padding: 14px 28px 14px 0; margin: 0; position: relative; min-height: 24px; }
+details.inv > summary::-webkit-details-marker { display: none; }
+details.inv > summary::after { content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 24px; font-weight: 800; }
+details.inv[open] > summary::after { content: "–"; }
+details.inv[open] > summary { margin: 0; }
+details.inv .inv-body { padding-bottom: 14px; display: flex; flex-direction: column; gap: 12px; }
+@media print { details.inv { border: 0; padding: 0; } details.inv > summary { display: block; padding: 0; } details.inv > summary::after { display: none; } }
