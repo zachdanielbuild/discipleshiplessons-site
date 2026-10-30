@@ -82,7 +82,8 @@ def clean(h):
     return x
 def blanks(x):
     return re.sub(r'_{3,}',lambda m:f'<span class="blank" style="width:{min(10,max(3,len(m.group(0))*0.32)):.1f}em" aria-label="blank"></span>',x)
-WS={'xsT5cRq_iss':'Tending-Your-Heart-Handout-1_-Invitation-to-Intimacy.pdf','Q6uoDldx_n4':'Tending-Your-Heart-Handout-2_-Hindrances-To-Hearing-God.pdf','l5k3Qp8jxbM':'Tending-Your-Heart-Handout-3_-Overcoming-Wounds-Lies.pdf','mF6RlNBjXwE':'Part-4-Handout-Tending-Your-Heart.pdf'}
+# Worksheets are hosted on this site in /files (moved off Squarespace Oct 30)
+WS={'xsT5cRq_iss':'tending-your-heart-1-invitation-to-intimacy.pdf','Q6uoDldx_n4':'tending-your-heart-2-hindrances-to-hearing-god.pdf','l5k3Qp8jxbM':'tending-your-heart-3-overcoming-wounds-and-lies.pdf','mF6RlNBjXwE':'tending-your-heart-4-how-to-tend-your-heart.pdf'}
 def body_for(i):
     x=clean(items[i]['content'])
     pre_extra=WHO if i==37 else ''
@@ -98,7 +99,7 @@ def body_for(i):
     def vid(m):
         n[0]+=1; v=m.group(1); pdf=WS.get(v)
         out=f'<div class="media"><a class="media-link" href="https://www.youtube.com/watch?v={v}">Watch lesson {n[0]} on YouTube</a>'
-        if pdf: out+=f'<a class="media-link alt" href="https://www.discipleshiplessons.com/s/{pdf}">Worksheet for lesson {n[0]} (PDF)</a>'
+        if pdf: out+=f'<a class="media-link alt" href="files/{pdf}">Worksheet for lesson {n[0]} (PDF)</a>'
         return out+'</div>'
     x=re.sub(r'<!--VIDEO:([\w-]+)-->',vid,x)
     x=re.sub(r'<p class="scripture">((?:[1-3] )?[A-Z][a-z]+(?: of [A-Z][a-z]+)? \d+[.:]\d+(?:[-–]\d+)?(?:,\s?\d+)?(?:\s?&amp;\s?\d+)?)\s+',r'<p class="scripture"><strong>\1</strong> ',x)

@@ -9,5 +9,10 @@
 /john-wesleys-22-accountability-questoins  /john-wesleys-22-questions  301
 /john-wesleys-22-accountability-questions  /john-wesleys-22-questions  301
 /whats-next-1  /disciplemaking-stories  301
+# Tending Your Heart worksheets moved off Squarespace
+/s/Tending-Your-Heart-Handout-1_-Invitation-to-Intimacy.pdf  /files/tending-your-heart-1-invitation-to-intimacy.pdf  301
+/s/Tending-Your-Heart-Handout-2_-Hindrances-To-Hearing-God.pdf  /files/tending-your-heart-2-hindrances-to-hearing-god.pdf  301
+/s/Tending-Your-Heart-Handout-3_-Overcoming-Wounds-Lies.pdf  /files/tending-your-heart-3-overcoming-wounds-and-lies.pdf  301
+/s/Part-4-Handout-Tending-Your-Heart.pdf  /files/tending-your-heart-4-how-to-tend-your-heart.pdf  301
 # Keep the build kit off the public site
 /build/*  /page-not-found  302
