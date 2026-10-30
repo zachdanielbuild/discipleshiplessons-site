@@ -62,11 +62,11 @@ def body(slug, ARROW):
         for a, n, t, m, c, f in journey) + '</nav>'
 
     seekers = stop('seekers', '1', RED, '#FFFFFF', 'Seekers', '1 study', 'They’re not sure about Jesus...',
-                   'This discipleship lesson is designed to be done with non-Christians who are interested in Jesus. In it, you will read through the Gospel of John together and learn more about Him.',
+                   'This study is designed to be done with non-Christians who are interested in Jesus. In it, you will read through the Gospel of John together and learn more about Him.',
                    [(6, 'Gospel of John Bible Study')])
     nb = stop('new-believers', '2', INK, '#FFFFFF', 'New Believers', '6 lessons', 'They just said yes to following Jesus',
               'This set of discipleship lessons is designed to be done with new believers. In it, you will focus on the Gospel, baptism, deliverance and church membership.',
-              [(7, 'Gospel Presentation'), (8, 'Your Testimony'), (9, 'Water Baptism'), (10, 'Deliverance Prayer'), (11, 'Baptism of the Holy Spirit'), (12, 'Church Membership')],
+              [(7, 'The Gospel'), (8, 'Your Testimony'), (9, 'Water Baptism'), (10, 'Deliverance'), (11, 'Baptism in the Holy Spirit'), (12, 'Church Membership')],
               [('Baptism', BAPTISM), ('Church Membership', MEMBERSHIP)])
     parts = (part(1, 'up', 'Look Up', 'Lays the foundation for developing a lifestyle of knowing, loving and walking with the Lord.',
                   [(2, 'Vision for a Vibrant Relationship with the Lord'), (3, 'Devoted to God’s Word'), (1, 'Devoted to Worship'), (4, 'Devoted to Prayer'), (5, 'Devoted to Listening'), (13, 'Devoted to Abiding and Obeying')],

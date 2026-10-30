@@ -497,3 +497,20 @@ html { scroll-behavior: smooth; }
 }
 @media (max-width: 380px) { .site header > a:first-child span { font-size: 16px !important; } .site header > a:first-child svg { width: 28px; height: 28px; } }
 @media (max-width: 340px) { .site header > a:first-child span { font-size: 14.5px !important; } }
+
+/* ---------- Oct 30 refinement ---------- */
+.step-body .scripture.passage { line-height: 1.9; }
+.step-body .idol-head { font-size: 19px; font-weight: 800; margin-top: 8px; }
+.step-body .examples { font-size: 17px; color: var(--ink-2, #3A3A3A); }
+.step-body ol.name-lines { list-style: decimal; padding-left: 28px; display: flex; flex-direction: column; gap: 10px; }
+.step-body ol.name-lines input.blank { width: min(22em, 100%) !important; }
+.pager .up-next span { color: #FFFFFF; }
+.crumbs { align-items: center; }
+.crumbs a { padding-block: 10px; }
+@media (max-width: 720px) {
+  .steps { flex-wrap: wrap; overflow: visible; margin-inline: 0; padding: 0; gap: 8px; }
+  .steps a { flex: 0 1 auto; padding: 9px 12px; font-size: 15px; min-height: 44px; box-sizing: border-box; }
+  .site footer span[style*="font-size: 32px"] { font-size: 24px !important; overflow-wrap: anywhere; }
+  .site footer a { display: inline-block; padding-block: 6px; }
+  .home [aria-label="A peek at a lesson"] > div > div:first-child { padding-top: 76px !important; }
+}

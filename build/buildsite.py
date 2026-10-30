@@ -10,14 +10,14 @@ CHALLENGE='https://passionandpurpose.kit.com/discipleship'
 slug=lambda i: items[i]['link'].strip('/')
 # ---------- structure ----------
 TRACKS=[
- ('seekers','For Seekers','#1D1D1D',[6]),
+ ('seekers','Seekers','#1D1D1D',[6]),
  ('new-believers','New Believers','#1D1D1D',[7,8,9,10,11,12]),
  ('look-up','Look Up','#1F7A4D',[2,3,1,4,5,13]),
  ('look-in','Look In','#B4561C',[14,15,16,17,18]),
  ('look-out','Look Out','#1B4FA0',[19,20,21,22]),
  ('freedom','Freedom Prayer Experience','#5B3F8C',[24,25,26,27,28,29,30,31]),
- ('deeper','Going Deeper','#1D1D1D',[23,34,32,33,36]),
- ('guides','Guides','#1D1D1D',[37,35]),
+ ('deeper','Further Growth','#1D1D1D',[23,34,32,33,36]),
+ ('guides','Start Here','#1D1D1D',[37,35]),
 ]
 TITLES={1:'Devoted to Worship',2:'Vision for a Vibrant Relationship with the Lord',3:"Devoted to God's Word",4:'Devoted to Prayer',5:'Devoted to Listening to the Holy Spirit',13:'Devoted to Abiding and Obeying',
  7:'The Gospel',8:'Your Testimony',9:'Water Baptism',10:'Deliverance',11:'Baptism in the Holy Spirit',12:'Church Membership',
@@ -378,6 +378,7 @@ def trail_html(secs):
         out+=f'<section class="step" id="s{k+1}"><span class="marker" aria-hidden="true">{k+1}</span><div class="step-body"><h2>{name}</h2>{body}</div></section>'
     return out+'</div>'
 
+SET_NEXT={6:(7,'Up next: New Believers'),12:(2,'Up next: Look Up'),13:(14,'Up next: Look In'),18:(24,'Up next'),31:(19,'Up next: Look Out'),22:(34,'Up next: Further Growth')}
 def page(i):
     inf=info[i]; ids=inf['ids']; n=inf['n']; t=TITLES[i]
     lessonish=inf['track'] in('new-believers','look-up','look-in','look-out','freedom') and not(inf['track']=='freedom' and n==0)
@@ -385,18 +386,25 @@ def page(i):
     elif lessonish: eyebrow=f'{inf["trackname"]} · Lesson {n+1} of {len(ids)}'
     else: eyebrow=inf['trackname']
     crumbs='<a href="index.html">Home</a>'
-    if inf['track'] in('new-believers','look-up','look-in','look-out','seekers'):
-        anchor={'seekers':'seekers','new-believers':'new-believers','look-up':'look-up','look-in':'look-in','look-out':'look-out'}[inf['track']]
-        crumbs+=f'<span aria-hidden="true">/</span><a href="discipleship-foundation-lessons.html">Discipleship Foundations</a><span aria-hidden="true">/</span><a class="crumb-track" href="discipleship-foundation-lessons.html#{anchor}">{inf["trackname"]}</a>'
-    elif inf['track']=='freedom' and n: crumbs+='<span aria-hidden="true">/</span><a href="the-freedom-prayer-experience.html">Freedom Prayer Experience</a>'
-    elif inf['track']=='deeper' and n: crumbs+='<span aria-hidden="true">/</span><a href="going-deeper-in-discipleship.html">Going Deeper</a>'
+    SEP='<span aria-hidden="true">/</span>'
+    if inf['track'] in('look-up','look-in','look-out'):
+        crumbs+=f'{SEP}<a href="discipleship-foundation-lessons.html#foundations">Discipleship Foundations</a>{SEP}<a class="crumb-track" href="discipleship-foundation-lessons.html#{inf["track"]}">{inf["trackname"]}</a>'
+    elif inf['track'] in('new-believers','seekers'):
+        crumbs+=f'{SEP}<a class="crumb-track" href="discipleship-foundation-lessons.html#{inf["track"]}">{inf["trackname"]}</a>'
+    elif inf['track']=='freedom' and n: crumbs+=f'{SEP}<a href="the-freedom-prayer-experience.html">Freedom Prayer Experience</a>'
+    elif inf['track']=='deeper' and n: crumbs+=f'{SEP}<a href="discipleship-foundation-lessons.html#further-growth">Further Growth</a>'
     nav=''
-    if len(ids)>1 and inf['track']!='guides':
+    if inf['track']!='guides':
         prev=ids[n-1] if n>0 else None; nxt=ids[n+1] if n+1<len(ids) else None
-        nav='<nav class="pager" aria-label="Lesson navigation">'
-        nav+=f'<a class="prev" href="{slug(prev)}.html"><span>Previous</span>{html.escape(TITLES[prev])}</a>' if prev is not None else '<span></span>'
-        nav+=f'<a class="next" href="{slug(nxt)}.html"><span>Next</span>{html.escape(TITLES[nxt])}</a>' if nxt is not None else '<span></span>'
-        nav+='</nav>'
+        upnext=None
+        if nxt is None and i in SET_NEXT: upnext=SET_NEXT[i]
+        if prev is not None or nxt is not None or upnext:
+            nav='<nav class="pager" aria-label="Lesson navigation">'
+            nav+=f'<a class="prev" href="{slug(prev)}.html"><span>Previous</span>{html.escape(TITLES[prev])}</a>' if prev is not None else '<span></span>'
+            if nxt is not None: nav+=f'<a class="next" href="{slug(nxt)}.html"><span>Next</span>{html.escape(TITLES[nxt])}</a>'
+            elif upnext: nav+=f'<a class="next up-next" href="{slug(upnext[0])}.html"><span>{upnext[1]}</span>{html.escape(TITLES[upnext[0]])}</a>'
+            else: nav+='<span></span>'
+            nav+='</nav>'
     note=''
     if inf['track'] in('look-up','look-in','look-out','new-believers'):
         note='<aside class="howto"><strong>How to use this lesson</strong><span>Read the Scriptures together and fill in the blanks. The leader shares their own story in Modeling. Then pick one thing to practice before you meet again.</span></aside>'
@@ -425,7 +433,9 @@ def page(i):
     clear='<button type="button" class="clear-answers">Clear my answers</button>' if has_blanks else ''
     if vision: desc=re.sub(r'^Why\?\s*','',vision)
     else:
-        fp=re.search(r'<p>(.*?)</p>',bodyhtml); desc=re.sub(r'<[^>]+>','',fp.group(1)) if fp else t
+        fp=re.search(r'<p>(.*?)</p>',bodyhtml); desc=re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' ',fp.group(1))) if fp else t
+        if inf['track']=='freedom' and n: desc=f'A guided prayer time from the Freedom Prayer Experience: identify {t[len("Freedom From "):].lower()}, confess and repent, and receive the healing and freedom Jesus brings.'
+        if i==33: desc='22 questions John Wesley and his friends used to grow in holiness and love. Use them to write accountability questions for your own discipleship group.'
     desc=html.unescape(desc).strip()
     if len(desc)>200: desc=desc[:197].rsplit(' ',1)[0]+'...'
     meta=share_meta(t+' | DiscipleshipLessons.com',desc,slug(i))
@@ -545,6 +555,105 @@ def foundations():
 </body>
 </html>
 '''
+
+# ---------- refinement pass (Oct 30 audit) ----------
+# Literal find-and-replace fixes per page, applied after FIXES and layout().
+# Each pair must match at least once, so the build fails loudly if the source text moves.
+INPUT='<input type="text" class="blank" aria-label="Fill in the blank" autocomplete="off" style="width:14em">'
+NAMES='<ol class="name-lines">'+''.join(f'<li>{INPUT}</li>' for _ in range(5))+'</ol>'
+LOOKUP_CONN=('Ask how have the 40 Days of Devotion gone so far.','Ask how the 40 Days of Devotion are going.')
+REFINE={
+ 'the-gospel':[('with God and with others relationships?','with God and with others?')],
+ 'your-testimony':[('The Gaderene Demoniac','The Gerasene Demoniac'),
+   ('<p>&quot;Jesus did not let him, but said, &#x27;Go home to your own people and tell them how much the Lord has done for you, and how he has had mercy on you.&#x27;</p><p>So the man went away and began to tell in the Decapolis how much Jesus had done for him. And all the people were amazed.&quot;</p>',
+    '<p class="scripture"><strong>Mark 5:19-20</strong> &quot;Jesus did not let him, but said, &#x27;Go home to your own people and tell them how much the Lord has done for you, and how he has had mercy on you.&#x27; So the man went away and began to tell in the Decapolis how much Jesus had done for him. And all the people were amazed.&quot;</p>')],
+ 'water-baptism':[('your Lord and Savior Yes','your Lord and Savior? Yes')],
+ 'deliverance':[('who you are in Christ..','who you are in Christ.')],
+ 'spirit-baptism':[('the Ephesians believers','the Ephesian believers'),('<em>witness</em>—boldly','<em>witness</em>: boldly')],
+ 'church-membership':[('<p>Why Membership Matters<ul>','<h3>Why Membership Matters</h3><ul>')],
+ 'vision-for-a-vibrant-relationship-with-the-lord':[('explain how it your relationship','explain how it shapes your relationship')],
+ 'devoted-to-the-word':[LOOKUP_CONN],'devoted-to-worship':[LOOKUP_CONN],'devoted-to-prayer':[LOOKUP_CONN],
+ 'devoted-to-listening-to-the-holy-spirit':[LOOKUP_CONN,('in your life?What makes','in your life?</li><li>What makes')],
+ 'devoted-to-abiding-and-obeying':[LOOKUP_CONN,('consumed by one another.</p><p class="scripture">16 But I say','consumed by one another. 16 But I say')],
+ 'growing-into-our-new-life-in-christ':[('how you view yourself ?What does','how you view yourself?</li><li>What does')],
+ 'confession':[('Ask how have the identity in Christ meditations are going.','Ask how the identity in Christ meditations are going.'),('selfishness (verse 18)?','selfishness (verses 19-21)?')],
+ 'replace':[('Here are a few tools that God uses to replacing a lifestyle of sin with a lifestyle of holiness and love. One of them is the ministry of the Holy Spirit.',
+   'One of the main ways God replaces a lifestyle of sin with a lifestyle of holiness and love is through the ministry of the Holy Spirit.'),
+   ('take time to practice confession of sin. How did it go in uprooting these areas from your lives?','How has it gone partnering with God to uproot the sins you confessed?')],
+ 'restore':[('go through our Freedom Prayer Experience together. This experience takes the what you learned','go through our <a href="the-freedom-prayer-experience.html">Freedom Prayer Experience</a> together. This experience takes what you learned')],
+ 'ambassador':[('as you these lessons','as you go through these lessons')],
+ 'in-jerusalem':[('His witness and ambassadors','His witnesses and ambassadors'),('What are some “areas of influence” has God assigned to you?','What “areas of influence” has God assigned to you?'),
+   ('find him. Yet he is actually not far from each one of us','find him. Yet he is actually not far from each one of us.'),
+   ('Write their names here:</p>','Write their names here:</p>'+NAMES)],
+ 'sharing-the-gospel':[('<h2>Biblical Foundations</h2><p>God has given us all a mission to be His witness and ambassadors. He has given each of us different spheres of influence where we live out that calling.</p>','<h2>Biblical Foundations</h2>')],
+ 'gospel-of-john-discovery-study':[('(John 20:31).”','(John 20:31).'),('21 weeks (about a semester)','21 weeks')],
+ 'freedom-from-generational-sin':[('Manasseh’s worshipped','Manasseh worshipped'),
+   ('(2 Chronicles</p><p>20:19)','(2 Chronicles 34:19)'),('gave him a blessing</p><p>(2 Chronicles 20.26)','gave him a blessing (2 Chronicles 34:26-28)'),
+   ('As we walk forward from lies into truth, medidate on Romans 5 and the generational blessing that is ours in Jesus:','As you walk forward in freedom, meditate on Romans 5 and the generational blessing that is ours in Jesus.')],
+ 'freedom-from-idolatry':[('found as worship you alone','found as we worship you alone'),('as a next in bearing','as a next step in bearing'),('He wants heal you','He wants to heal you'),
+   ('1 Samuel 16.14.23','1 Samuel 16.14-23'),('Zaccheus','Zacchaeus'),('(Easton’s Bible Dictionary) in Scripture we see','(Easton’s Bible Dictionary). In Scripture we see')],
+ 'freedom-from-bitterness':[('Matthew 7.43-48','Matthew 5.43-48'),('as a next in bearing','as a next step in bearing'),('my heart, my thought and my life','my heart, my thoughts and my life'),
+   ('While Joseph forgave his brothers and initiated</p><p>reconciliation with his brothers who had sold him into slavery.','Joseph forgave the brothers who had sold him into slavery and initiated reconciliation with them.')],
+ 'freedom-from-rebellion':[('They rebellion against God','Their rebellion against God'),('Absolom','Absalom'),('Saphira','Sapphira'),('search my hearts, my thoughts','search my heart, my thoughts')],
+ 'freedom-from-pride':[('are currently walked in pride','are currently walking in pride')],
+ 'freedom-from-lies-and-deception':[('list of common areas people walked in pride in Scripture','list of common lies people believe, each with a Scripture that speaks to it'),('are currently walked in lies and deception','are currently walking in lies and deception')],
+ 'freedom-from-habitual-sin':[('<p>Romans 5:12“','<p>Romans 6:12-14 “'),('receive forgiveness and grace for humility','receive forgiveness and grace to walk in the Spirit'),
+   ('As we release these lies','As we release these patterns'),('Galatians 5 and Mark 7.20-23)','Galatians 5 and Mark 7.20-23'),('Debauchery;','Debauchery'),('Idolatry and witchcraft;','Idolatry and witchcraft')],
+ 'going-deeper-in-discipleship':[('curated activities to building on','curated activities for building on'),('laid in looking in and cultivating a Great Commission','laid in Look Out and cultivating a Great Commission')],
+ 'planning-your-next-season-of-discipleship':[('Using these 6 questions at the start of any season, to put together','Use these 6 questions at the start of any season to put together'),('next season of a discipleship group:','next season with a discipleship group:')],
+ 'whats-next-1':[('Kyle faithfully lead a','Kyle faithfully leads a')],
+ 'who-should-i-disciple':[('you might be asking of were do I start with them?','you might be asking where to start with them.'),
+   ('without hesitation when Jesus called.','without hesitation when Jesus calls.'),('who recognized her need for a Savior rather than thinking they have','who recognizes her need for a Savior rather than thinking she has')],
+ 'the-freedom-prayer-experience':[('Freedom From Habitual Sins of the Flesh','Freedom From Habitual Sin')],
+}
+# A paragraph that opens with a Bible reference and then quotes the passage becomes a Scripture card.
+_BOOK=r'(?:[123] )?(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Nehemiah|Job|Psalms?|Proverbs|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Jonah|Micah|Habakkuk|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Col|Thessalonians|Timothy|Titus|Hebrews|James|Peter|Jude|Revelation)'
+_REF=_BOOK+r' \d+[:.]\d+(?:[-–]\d+)?(?:,\s?\d+)?(?: \((?:NIV|ESV|NASB)\))?'
+def promote_verses(x):
+    def para(m):
+        inner=m.group(1)
+        flat=re.sub(r'</?(?:em|strong)>','',inner)
+        mm=re.match(r'\s*(\d+\.\s+)?('+_REF+r')\s*(?:-\s*|:\s*|—\s*)?(?=[“"&A-Z\d<])(.*)$',flat,re.S)
+        if not mm: return m.group(0)
+        rest=mm.group(3).strip()
+        if len(re.sub(r'<[^>]+>','',rest))<25: return m.group(0)
+        label=(mm.group(1) or '').replace('.','').strip()
+        ref=mm.group(2)
+        lab=f'{label} · {ref}' if label else ref
+        return f'<p class="scripture"><strong>{lab}</strong> {rest}</p>'
+    return re.sub(r'<p>((?:(?!</?p[ >]|<ul>|<ol>|<h\d).)*?)</p>',para,x,flags=re.S)
+def idol_cards(x):
+    # heart idols: "1. Idolatry of ..." with a list of verses and examples -> heading, verse cards, examples line
+    def grp(m):
+        out=f'<h4 class="idol-head">{m.group(1).strip().rstrip(":")}</h4>'
+        for li in re.findall(r'<li>(.*?)</li>',m.group(2),re.S):
+            ex=re.match(r'Common (?:current )?examples:\s*(.*)$',li,re.I|re.S)
+            if ex: out+=f'<p class="examples"><strong>Common examples:</strong> {ex.group(1).rstrip(")").strip()}</p>'
+            else:
+                v=re.match(r'('+_REF+r'):\s*(.*)$',li,re.S)
+                out+=f'<p class="scripture"><strong>{v.group(1)}</strong> {v.group(2)}</p>' if v else f'<p>{li}</p>'
+        return out
+    return re.sub(r'<p><strong>(\d\. Idolatry of[^<]*)</strong><ul>(.*?)</ul>',grp,x,flags=re.S)
+def passage_card(x,lead_end,ref):
+    # paragraphs after a stray "—" line are one long passage -> one card
+    i=x.index('<p>—</p>'); j=x.find('<h2>',i); j=len(x) if j<0 else j
+    paras=re.findall(r'<p>(.*?)</p>',x[i+8:j],re.S)
+    card=f'<p class="scripture passage"><strong>{ref}</strong> '+'<br><br>'.join(paras)+'</p>'
+    return x[:i]+card+x[j:]
+_body_for_fixed=body_for
+def body_for(i):
+    x=_body_for_fixed(i); s=slug(i)
+    for a,b in REFINE.get(s,[]):
+        assert a in x,(s,a[:70]); x=x.replace(a,b)
+    if s=='freedom-from-generational-sin':
+        x,n=re.subn(r'<p>R<em>omans 5\.15 (.*?)</em></p>',r'<p class="scripture"><strong>Romans 5:15-17</strong> \1</p>',x,flags=re.S); assert n==1
+        x=passage_card(x,None,'Romans 5')
+    if s=='freedom-from-idolatry':
+        x=idol_cards(x); x=passage_card(x,None,'1 Thessalonians 1')
+    if s=='spirit-baptism':
+        for lab,ref in (('New Fruit','Galatians 5:22-23'),('New Gifts','1 Corinthians 12:7')):
+            x,n=re.subn(r'<p><strong>'+lab+r'-? </strong><em>'+re.escape(ref)+r' (.*?)</em></p>',f'<p class="scripture"><strong>{lab} · {ref}</strong> \\1</p>',x,flags=re.S); assert n==1,(lab)
+    return promote_verses(x)
 
 files=[]
 for i in info:
