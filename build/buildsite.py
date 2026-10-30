@@ -128,7 +128,7 @@ _blank=lambda w,c: f'<span style="display: inline-block; min-width: {w}px; borde
 _steps=''.join(f'<span class="card-step{" on" if k==2 else ""}"><b>{k+1}</b>{n}</span>' for k,n in enumerate(['Connection','Vision','Biblical Foundations','Modeling','Practice']))
 _card_new=f'''<div style="font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #555555">Look Out  ·  Lesson 1 of 4</div>
 <div style="font-weight: 900; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em">Your Identity as a Witness and Ambassador</div>
-<div class="card-why"><b>Why?</b> When you placed your faith in Christ, you received a new identity as God’s child and a new purpose as His witness and ambassador.</div>
+<div class="card-why"><b>Why?</b> Look Out starts with identity, not technique. Help them see that being a witness is who they already are in Christ, and start them praying daily to notice the opportunities around them.</div>
 <div class="card-steps" aria-label="Every lesson has five parts">{_steps}</div>
 <div class="card-scripture"><div class="card-ref">Acts 1:8</div>"But you will receive {_blank(120,'#1B4FA0')}power</span> when the Holy Spirit comes on you; and you will be my {_blank(140,'#1B4FA0')}witnesses</span> in Jerusalem, and in all Judea and Samaria, and to the ends of the earth."</div>
 <div style="display: flex; flex-direction: column; gap: 8px">
@@ -654,6 +654,67 @@ def body_for(i):
         for lab,ref in (('New Fruit','Galatians 5:22-23'),('New Gifts','1 Corinthians 12:7')):
             x,n=re.subn(r'<p><strong>'+lab+r'-? </strong><em>'+re.escape(ref)+r' (.*?)</em></p>',f'<p class="scripture"><strong>{lab} · {ref}</strong> \\1</p>',x,flags=re.S); assert n==1,(lab)
     return promote_verses(x)
+
+# ---------- Why? and Vision copy (approved by Zach in Notion, Oct 30) ----------
+# Why? = for the discipler. Vision = what the discipler shares with the person they are discipling.
+WHY={
+ 6:'John wrote his Gospel so that people would “believe that Jesus is the Messiah, the Son of God, and that by believing you may have life in his name” (John 20:31). Your goal isn’t to win an argument. It’s to read Jesus’ story together and let Him speak for Himself.',
+ 7:'This may be the most important conversation you ever have with them. Walk through the good news simply and clearly, and give them a real chance to respond to Jesus.',
+ 8:'New believers often think they need to know a lot before they can talk about Jesus. This lesson shows them their own story is already a powerful witness, and helps them get ready to share it this week.',
+ 9:'Baptism is one of the first steps of obedience Jesus has for every believer. Help them understand what it means, answer their questions, and help them make a plan to be baptized.',
+ 10:'Many new believers carry things from their old life: sin, demons, bitterness, wounds. This lesson helps them understand the freedom they have in Christ and walk through a prayer to break with the past.',
+ 11:'Jesus told His disciples to wait for the power of the Holy Spirit before they went out. This lesson helps them understand that promise and gives you time to pray together for them to be filled.',
+ 12:'Following Jesus was never meant to be done alone. This lesson helps them see why a local church matters and take the next step to belong to one.',
+ 2:'Everything else in Look Up grows out of this. Help them see that Jesus wants them with Him first, and get them started on a daily habit of time with Him through 40 Days of Devotion.',
+ 3:'A disciple who can feed themselves from Scripture will keep growing long after you stop meeting. This lesson helps them taste how good God’s Word is and build a daily habit of reading it.',
+ 1:'Worship turns their attention from themselves to God. This lesson helps them discover worship as a privilege, not a duty, and find simple ways to worship in their daily time with Jesus.',
+ 4:'The early church was devoted to prayer and saw God answer. This lesson helps them grow from occasional prayer to a living conversation with God, using the Lord’s Prayer as a guide.',
+ 5:'Many believers have never been taught that God speaks. This lesson gives them biblical confidence that He does, and time to practice listening together in a safe place.',
+ 13:'This lesson connects their time with Jesus to the rest of their day. Help them see abiding and obeying as one walk with Him, and name one area where God is calling them to obey.',
+ 14:'This lesson grounds their identity as God’s child, and lays the foundation for walking in a lifestyle of holiness and love.',
+ 15:'Hidden sin keeps people stuck. This lesson helps them see confession as freedom, not shame, and prepares them to practice it with you next time you meet.',
+ 16:'Confession names the sin; repentance turns from it. This lesson helps them move from feeling sorry to real change, and to partner with God in uprooting what they confessed.',
+ 17:'Removing sin leaves an empty space. This lesson helps them fill it with truth, healing and new habits, and invites the Holy Spirit to heal what’s underneath their sin.',
+ 18:'This is where Look In lands: holiness and love. Help them see what God is restoring in them, then lead them into the Freedom Prayer Experience.',
+ 19:'Look Out starts with identity, not technique. Help them see that being a witness is who they already are in Christ, and start them praying daily to notice the opportunities around them.',
+ 20:'Most people come to Jesus through someone they already know. This lesson helps them map their relationships and start praying by name for the people God has placed around them.',
+ 21:'Fear keeps many believers quiet. This lesson builds their confidence in the power of the gospel, gives them a simple way to share it, and gets you out sharing together.',
+ 22:'This is the goal of everything you’ve done together: that they would do the same with someone else. Help them identify who they could invest in and take a first step this week.',
+}
+SHARE={
+ 7:'God loves you, and He wants you to experience real peace and life, both now and forever. Jesus said He came so you could have life to the full. Today we’re going to look at how that’s possible, and what it means to say yes to Him.',
+ 8:'Every disciple of Jesus has a story of what God has done in their life. Sharing these stories is a powerful way to give glory to God and witness to others.',
+ 9:'Baptism is a picture of what Jesus has already done in you. Going under the water shows that your old life has died with Christ, and coming up shows that you’ve been raised to a brand new life. It’s a joyful, public way of saying, “I belong to Jesus now.”',
+ 10:'God has rescued you from the kingdom of darkness and brought you into the kingdom of His Son. You are a new creation. Today we get to stand on that truth together and close the door on anything from your old life.',
+ 11:'When you gave your life to Jesus, the Holy Spirit came to live inside you. This lesson is about being filled with His power to live boldly for Him, receiving gifts to serve others, and growing new fruit in your character.',
+ 12:'You were not meant to follow Jesus alone. God has given you a family in the church: people to encourage you, walk with you and serve alongside you. Joining a local church is how you say yes to that family.',
+ 2:'Jesus didn’t call His disciples just to work for Him. He called them first and foremost to be with Him. Before He ever sent them out, He wanted them to know His presence, learn from Him and become His friends. That’s what He wants with you too: a real, growing, daily friendship.',
+ 3:'Jesus said we don’t live on bread alone, but on every word that comes from the mouth of God. The Bible is daily bread for your soul. It nourishes you, steadies you, and is one of the main ways Jesus speaks to you as a friend.',
+ 1:'God is worthy of all our praise, and He invites us into His presence with thanksgiving. Worship isn’t just singing on Sunday. It’s a heart that turns toward God throughout the day, and it’s one of the sweetest parts of friendship with Jesus.',
+ 4:'Prayer is simply talking with your Father, who loves you and loves to answer. The first disciples devoted themselves to prayer, and they saw God move in amazing ways. Jesus invites you into that same kind of prayer life.',
+ 5:'The Holy Spirit lives inside you. He is God’s presence with you always, your Helper and your guide. Jesus said His sheep know His voice, and He wants you to learn to recognize it. Friendship goes both ways: we talk to God, and He speaks to us.',
+ 13:'Jesus doesn’t just want an hour of your day. He wants to walk with you through all of it. As you keep in step with the Spirit and say yes to what He asks, you’ll find His life, joy and peace growing in you.',
+ 14:'The moment you put your faith in Jesus, you became a child of God. You were adopted into His family, and He is a loving Father who is committed to making you more like Jesus. You don’t grow to earn His love. You grow because you already have it.',
+ 15:'To confess simply means to agree with God. When we bring our sin into the light, God is faithful to forgive us and cleanse us.',
+ 16:'Confession names the sin; repentance turns from it. Repentance is more than feeling bad. It’s a change of mind, heart and direction: turning away from sin and toward God. And the Bible promises that when we repent, times of refreshing come from the Lord.',
+ 17:'God doesn’t just want to pull the weeds of sin out of your life. He wants to plant something good in their place. As you put off your old self, He clothes you with compassion, kindness, humility and love. The Christian life isn’t only about what you avoid. It’s about who you’re becoming.',
+ 18:'Everything God is doing in you is leading somewhere beautiful: a life of holiness and love that looks like Jesus. You were created for this. As He heals and transforms you, you’ll find yourself loving God and loving others more freely than ever.',
+ 19:'When you put your faith in Jesus, you didn’t just get a new identity as God’s child. You got a new purpose. You are Christ’s ambassador, and God is making His appeal to the world through you. You don’t have to become a witness. You already are one.',
+ 20:'God has placed you exactly where you are on purpose. Your family, friends, neighbors and coworkers are your Jerusalem: the people God has given you to love and reach. Your mission field isn’t far away. It starts right where you live.',
+ 21:'The gospel is the power of God for salvation. That means the power isn’t in how well you say it. It’s in the message itself. Your part is to share it clearly and with love, and trust God with the results.',
+ 22:'Jesus’ last command wasn’t just to make converts. It was to make disciples who make disciples. Someone invested in you, and now it’s your turn. As you pour into a few faithful people and they pour into others, the gospel multiplies far beyond what any of us could do alone.',
+}
+for _k,_v in WHY.items(): VISION[_k]='Why? '+_v
+_restructure_old=restructure
+def restructure(i,secs):
+    vision,secs=_restructure_old(i,secs)
+    if i in WHY: vision='Why? '+WHY[i]
+    if i in SHARE:
+        lead=f'<p class="vision-lead">{html.escape(SHARE[i],quote=False)}</p>'
+        vs=[s for s in secs if s[0]=='Vision']
+        if vs: vs[0][1]=lead
+        else: secs.insert(1,['Vision',lead])
+    return vision,secs
 
 files=[]
 for i in info:
