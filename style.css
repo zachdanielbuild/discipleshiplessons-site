@@ -548,3 +548,8 @@ details.inv .inv-body { padding-bottom: 14px; display: flex; flex-direction: col
   .home header nav { display: none !important; }
   .home header > div > a:last-child { padding: 8px 14px !important; white-space: nowrap; flex: none; }
 }
+@media (max-width: 360px) {
+  .home header > div > a:first-child { font-size: 13px !important; gap: 6px !important; }
+  .home header > div > a:first-child svg { width: 24px; height: 24px; }
+  .home header > div > a:last-child { padding: 7px 12px !important; font-size: 13px !important; }
+}
