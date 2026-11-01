@@ -528,3 +528,8 @@ details.inv[open] > summary::after { content: "–"; }
 details.inv[open] > summary { margin: 0; }
 details.inv .inv-body { padding-bottom: 14px; display: flex; flex-direction: column; gap: 12px; }
 @media print { details.inv { border: 0; padding: 0; } details.inv > summary { display: block; padding: 0; } details.inv > summary::after { display: none; } }
+
+/* library homepage (Nov 1): the four seed-to-fruit set cards stay 4, 2 or 1 across */
+.setcards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) { .setcards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .setcards { grid-template-columns: minmax(0, 1fr); } }
