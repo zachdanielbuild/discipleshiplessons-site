@@ -542,9 +542,9 @@ details.inv .inv-body { padding-bottom: 14px; display: flex; flex-direction: col
 @media (prefers-reduced-motion: reduce) { .setcards > a, .setcards > a:hover { transition: none; transform: none; } }
 /* library homepage header on phones: logo, name and Start here on one row with a side margin */
 @media (max-width: 600px) {
-  .home > header > div { padding: 12px max(16px, env(safe-area-inset-left, 0px)) !important; flex-wrap: nowrap !important; gap: 10px !important; justify-content: space-between; }
-  .home > header > div > a:first-child { font-size: 16px !important; gap: 8px !important; min-width: 0; white-space: nowrap; }
-  .home > header > div > a:first-child svg { width: 30px; height: 30px; flex: none; }
-  .home > header nav { display: none !important; }
-  .home > header > div > a:last-child { padding: 8px 14px !important; white-space: nowrap; flex: none; }
+  .home header > div { padding: 12px max(16px, env(safe-area-inset-left, 0px)) !important; flex-wrap: nowrap !important; gap: 10px !important; justify-content: space-between; }
+  .home header > div > a:first-child { font-size: 16px !important; gap: 8px !important; min-width: 0; white-space: nowrap; }
+  .home header > div > a:first-child svg { width: 30px; height: 30px; flex: none; }
+  .home header nav { display: none !important; }
+  .home header > div > a:last-child { padding: 8px 14px !important; white-space: nowrap; flex: none; }
 }
