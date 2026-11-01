@@ -166,6 +166,9 @@ _pos=[inner.index(m) for m in _m]
 assert _pos==sorted(_pos),'homepage sections moved'
 _seg={m:inner[a:b] for m,a,b in zip(_m,_pos,_pos[1:]+[len(inner)])}
 inner=(inner[:_pos[0]]+_seg[_m[0]]+_seg[_m[1]]+sets_section(slug)+'\n\n'+_seg[_m[6]]+_seg[_m[2]]+_seg[_m[7]]+inner[inner.index('<footer'):])
+# Nov 1, 2026: the library homepage replaces the postcard homepage (old one above kept for reference)
+from homelibrary import library_home
+inner=library_home(YT,footer,LOGO)
 # ---------- index ----------
 idx=f'''<title>DiscipleshipLessons.com</title>
 {FONTS}
