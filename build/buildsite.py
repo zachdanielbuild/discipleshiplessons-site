@@ -156,7 +156,7 @@ footer=H[H.index('<footer'):H.index('</footer>')+9]
 footer=footer.replace('href="#start"','href="index.html#start"')
 inner=H[H.index('<x-dc>')+6:H.index('</x-dc>')]
 inner=re.sub(r'<helmet>.*?</helmet>','',inner,flags=re.S)
-FONTS='<link rel="icon" href="favicon.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="apple-touch-icon.png">\n<meta name="theme-color" content="#FFFFFF">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800;900&family=Caveat:wght@500;700&display=swap" rel="stylesheet">'
+FONTS='<link rel="icon" href="favicon.ico?v=tree" sizes="any">\n<link rel="icon" href="favicon.svg?v=tree" type="image/svg+xml">\n<link rel="icon" href="favicon-96.png?v=tree" type="image/png" sizes="96x96">\n<link rel="apple-touch-icon" href="apple-touch-icon.png?v=tree">\n<meta name="theme-color" content="#FFFFFF">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800;900&family=Caveat:wght@500;700&display=swap" rel="stylesheet">'
 # homepage order: hero, sample lesson, lesson sets (tabs), testimonials, postcard, questions, closing
 from homesets import sets_section
 def _cut(s,start,end):

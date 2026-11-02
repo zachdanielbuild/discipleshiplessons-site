@@ -4,7 +4,7 @@
 set -e
 B="$(cd "$(dirname "$0")" && pwd)"; R="$(dirname "$B")"
 cd "$B" && python3 buildsite.py && python3 launchfiles.py
-for f in "$B"/site/*.html "$B"/site/_redirects "$B"/site/robots.txt "$B"/site/sitemap.xml "$B"/site/share.png "$B"/site/apple-touch-icon.png "$B"/site/favicon.svg "$B"/site/style.css; do
+for f in "$B"/site/*.html "$B"/site/_redirects "$B"/site/robots.txt "$B"/site/sitemap.xml "$B"/site/share.png "$B"/site/apple-touch-icon.png "$B"/site/favicon.svg "$B"/site/favicon.ico "$B"/site/favicon-96.png "$B"/site/style.css; do
   b=$(basename "$f"); [ "$b" = index.html ] || cp "$f" "$R/"
 done
 python3 - "$B/site/index.html" "$R/index.html" <<'PY'

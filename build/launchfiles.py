@@ -45,7 +45,7 @@ body='''<main>
 </div></div>
 '''
 h404=head+body+foot
-h404=h404.replace('href="index.html','href="/index.html').replace('href="style.css"','href="/style.css"').replace('href="favicon.svg"','href="/favicon.svg"').replace('href="apple-touch-icon.png"','href="/apple-touch-icon.png"')
+h404=h404.replace('href="index.html','href="/index.html').replace('href="style.css"','href="/style.css"').replace('href="favicon','href="/favicon').replace('href="apple-touch-icon.png','href="/apple-touch-icon.png')
 h404=re.sub(r'href="([a-z0-9-]+)\.html','href="/\\1',h404)
 open(S+'404.html','w').write(h404)
 print('ok',len(pages))
