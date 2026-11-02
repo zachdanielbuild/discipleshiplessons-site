@@ -31,6 +31,9 @@ info={}
 for key,name,color,ids in TRACKS:
     for n,i in enumerate(ids):
         info[i]=dict(track=key,trackname=name,color=color,n=n,ids=ids)
+# Nov 2: every set uses the homepage's green family (chrome.TRACK)
+import chrome
+for _i,_v in info.items(): _v['color'],_v['tint']=chrome.TRACK[_v['track']]
 SLUGS={slug(i) for i in info}
 LINKFIX={'start-here':'discipleship-foundation-lessons','whats-next':'going-deeper-in-discipleship','lessons':'discipleship-foundation-lessons','devoted-to-gods-word':'church-membership','home':'index','faq':'index','whats-next-1':'disciplemaking-stories','john-wesleys-22-accountability-questoins':'john-wesleys-22-questions'}
 def fixlink(h):
@@ -168,7 +171,9 @@ _seg={m:inner[a:b] for m,a,b in zip(_m,_pos,_pos[1:]+[len(inner)])}
 inner=(inner[:_pos[0]]+_seg[_m[0]]+_seg[_m[1]]+sets_section(slug)+'\n\n'+_seg[_m[6]]+_seg[_m[2]]+_seg[_m[7]]+inner[inner.index('<footer'):])
 # Nov 1, 2026: the library homepage replaces the postcard homepage (old one above kept for reference)
 from homelibrary import library_home
-inner=library_home(YT,footer,LOGO)
+# Nov 2: one header and footer for every page (chrome.py)
+header=chrome.header(LOGO); footer=chrome.footer()
+inner=library_home(YT,chrome.footer(home=True),LOGO,slug,TITLES)
 # ---------- index ----------
 idx=f'''<title>DiscipleshipLessons.com</title>
 {FONTS}
@@ -301,7 +306,7 @@ def layout(i,x):
         rows=''
         for k,(h,t) in enumerate(re.findall(r'<li><a href="([^"]+)">(.*?)</a></li>',m.group(1))):
             t=re.sub(r'^Inventory \d+:\s*','',t).replace('The Freedom From','Freedom From').strip()
-            rows+=f'<a class="row" href="{h}"><span class="num" style="background:#5B3F8C">{k+1}</span><span class="row-title">{t}</span>{ROW_ARROW}</a>'
+            rows+=f'<a class="row" href="{h}"><span class="num">{k+1}</span><span class="row-title">{t}</span>{ROW_ARROW}</a>'
         x=x[:m.start()]+'</p><div class="rows inventories">'+rows+'</div>'+x[m.end():]
     return x
 
@@ -464,7 +469,7 @@ def page(i):
 <div class="site">
 {header}
 <main>
-<section class="lesson-hero" style="--track: {inf['color']}">
+<section class="lesson-hero" style="--track: {inf['color']}; --tint: {inf['tint']}">
 <div class="wrap">
 <div class="hero-grid{' has-vision' if vision else ''}">
 <div class="hero-main">
@@ -479,7 +484,7 @@ def page(i):
 {steps}
 </div>
 </section>
-<article class="lesson wrap" style="--track: {inf['color']}">
+<article class="lesson wrap" style="--track: {inf['color']}; --tint: {inf['tint']}">
 <p class="print-only print-head">{html.escape(t)} · {html.escape(eyebrow)} · discipleshiplessons.com</p>
 {note}
 {bodyhtml}
@@ -543,7 +548,7 @@ def foundations():
     S.append(stop('look-out','5','#1B4FA0','Look Out','This set of discipleship lessons are designed to be done with a growing disciple after completing Look Up and Look In. Look Out lays the foundation for a Great Commission lifestyle.','Lessons:',[19,20,21,22],['Your Identity as a Witness and Ambassador','Your Sphere of Influence','Sharing the Gospel with Confidence','Making Disciples Who Make Disciples'],part='Part 3:'))
     S.append(f'<section class="stop next-stop" id="next"><span class="marker pin" aria-hidden="true">{PIN.format(w=36,h=48)}</span><div class="stop-card dark"><h2>What’s Next?</h2><p>When you finish these foundations, you might be asking “what’s next?” Here are some good next steps in discipleship.</p><a class="btn-yellow" href="going-deeper-in-discipleship.html">What’s Next{ARROW}</a></div></section>')
     from foundpage import body as _fd
-    FD_HERO,FD_MAIN,FD_SCRIPT=_fd(slug,ARROW)
+    FD_HERO,FD_MAIN,FD_SCRIPT=_fd(slug,ARROW,TITLES)
     return f'''<!doctype html>
 <html lang="en">
 <head>
