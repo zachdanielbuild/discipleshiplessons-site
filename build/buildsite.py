@@ -150,7 +150,7 @@ _card_new=f'''<div style="font-size: 14px; font-weight: 800; text-transform: upp
 </div>
 '''
 H=H.replace(_card_old,_card_new,1)
-LOGO='<svg width="40" height="40" aria-hidden="true" viewBox="0 0 120 120"><path d="M60 112 V74 M60 88 L46 76 M60 82 L76 70" stroke="#6B4A2B" stroke-width="9" stroke-linecap="round" fill="none"/><circle cx="60" cy="46" r="34" fill="#4FAE74"/><circle cx="31" cy="62" r="22" fill="#4FAE74"/><circle cx="89" cy="60" r="23" fill="#4FAE74"/><circle cx="48" cy="34" r="16" fill="#3E9A62"/><circle cx="76" cy="38" r="14" fill="#3E9A62"/><circle cx="40" cy="56" r="7.5" fill="#D9483B"/><circle cx="66" cy="28" r="7.5" fill="#D9483B"/><circle cx="86" cy="64" r="7.5" fill="#D9483B"/><circle cx="58" cy="62" r="6.5" fill="#E8B04A"/><circle cx="28" cy="72" r="6" fill="#E8B04A"/></svg>'
+LOGO='<img class="antioch-a" src="/antioch-a.png" alt="" width="40" height="40">'
 H=re.sub(r'<svg width="38" height="38" viewBox="0 0 40 40".*?</svg>',LOGO,H,count=1,flags=re.S)
 MENU_BTN='<button type="button" class="menu-btn" aria-expanded="false" aria-controls="mainnav" onclick="var h=this.closest(\'header\');var o=h.classList.toggle(\'open\');this.setAttribute(\'aria-expanded\',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg><span class="sr-only">Menu</span></button>'
 H=H.replace('<nav aria-label="Main"',MENU_BTN+'<nav id="mainnav" aria-label="Main"',1)
@@ -159,7 +159,7 @@ footer=H[H.index('<footer'):H.index('</footer>')+9]
 footer=footer.replace('href="#start"','href="index.html#start"')
 inner=H[H.index('<x-dc>')+6:H.index('</x-dc>')]
 inner=re.sub(r'<helmet>.*?</helmet>','',inner,flags=re.S)
-FONTS='<link rel="icon" href="favicon.ico?v=tree" sizes="any">\n<link rel="icon" href="favicon.svg?v=tree" type="image/svg+xml">\n<link rel="icon" href="favicon-96.png?v=tree" type="image/png" sizes="96x96">\n<link rel="apple-touch-icon" href="apple-touch-icon.png?v=tree">\n<meta name="theme-color" content="#FFFFFF">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Figtree:wght@400;500;700;800;900&family=Caveat:wght@500;700&display=swap" rel="stylesheet">'
+FONTS='<link rel="icon" href="favicon.ico?v=a" sizes="any">\n<link rel="icon" href="favicon.svg?v=a" type="image/svg+xml">\n<link rel="icon" href="favicon-96.png?v=a" type="image/png" sizes="96x96">\n<link rel="apple-touch-icon" href="apple-touch-icon.png?v=a">\n<meta name="theme-color" content="#FFFFFF">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Figtree:wght@400;500;700;800;900&family=Caveat:wght@500;700&display=swap" rel="stylesheet">'
 # homepage order: hero, sample lesson, lesson sets (tabs), testimonials, postcard, questions, closing
 from homesets import sets_section
 def _cut(s,start,end):

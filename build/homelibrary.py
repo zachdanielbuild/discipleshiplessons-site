@@ -65,9 +65,7 @@ HERO = '''<section id="top" class="home-hero gc-hero">
 
 
 def great_commission(h, logo):
-    import base64
-    a = base64.b64encode(open(D + 'site/antioch-a-white.png', 'rb').read()).decode()
-    mark = f'<img class="antioch-a" src="data:image/png;base64,{a}" alt="" width="34" height="34">'
+    mark = '<img class="antioch-a" src="/antioch-a-white.png" alt="" width="40" height="40">'
     i = h.index('</header>')
     head = h[:i].replace('<header class="topbar">', '<header class="topbar gc-top">', 1)
     assert logo in head

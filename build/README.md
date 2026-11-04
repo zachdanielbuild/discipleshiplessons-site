@@ -20,7 +20,8 @@ Pushing to `main` deploys to https://discipleshiplessons-site.pages.dev in about
 | `home_frozen.dc.html` | Source of the homepage (the approved postcard design). `buildsite.py` fixes its links by line number (`HMAP`), so keep line counts the same when editing it. |
 | `tree_svgs.json` | The "What's our strategy?" tree drawings on Who Should I Disciple. |
 | `site/style.css` | All styles, including phone and print. Edited by hand, not generated. |
-| `site/favicon.svg`, `share.png`, `apple-touch-icon.png` | Logo, link-preview image, phone home-screen icon. |
+| `site/antioch-a.png`, `site/antioch-a-white.png` | The Antioch A logo in the header (white on the homepage), Nov 3. |
+| `site/favicon.svg`, `favicon.ico`, `favicon-96.png`, `apple-touch-icon.png`, `share.png` | Tab icon and phone icon (white A on brand green), link-preview image. |
 | `launchfiles.py` | Writes `_redirects`, `robots.txt`, `sitemap.xml` and `404.html`. |
 | `deploy.sh` | Runs both builders and copies the results to the repo root. |
 
