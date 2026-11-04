@@ -39,5 +39,41 @@ def library_home(yt, footer, logo, slug=None, titles=None):
     h = _sub(h, r'<section id="library".*?</section>', lib)
     h = h.replace('<section style="background: #FBF7F0; padding: 72px 24px;">', '<section id="faq" style="background: #FBF7F0; padding: 72px 24px;">', 1)
     h = _sub(h, r'<footer.*?</footer>', footer)
+    h = great_commission(h, logo)
     assert 'href="#"' not in h and 'pages.dev' not in h
     return h
+
+
+# Nov 3, 2026: brand green header and "Go and make disciples." hero, the white
+# Antioch A in place of the tree (homepage only), and no set cards: the lesson
+# peek sits right under the hero. Styles: the "Nov 3" block at the end of style.css.
+HERO = '''<section id="top" class="home-hero gc-hero">
+<span class="gc-e">Matthew 28:19</span>
+<h1 class="gc-h">Go and make<br><span class="gc-a">disciples.</span></h1>
+<p class="gc-p">Jesus calls all of us to make disciples. These lessons can help you fulfill that calling with the people already in your life.</p>
+<div class="gc-ask">
+<span class="gc-l">Who are you meeting with this week?</span>
+<div class="gc-pills">
+<a class="p1" href="#seekers">A seeker</a>
+<a class="p2" href="#new-believers">A new believer</a>
+<a class="p3" href="#foundations">A growing disciple</a>
+<a class="p4" href="#further-growth">A leader</a>
+</div>
+<span class="gc-free">Free to use, print and share.</span>
+</div>
+</section>'''
+
+
+def great_commission(h, logo):
+    import base64
+    a = base64.b64encode(open(D + 'site/antioch-a-white.png', 'rb').read()).decode()
+    mark = f'<img class="antioch-a" src="data:image/png;base64,{a}" alt="" width="34" height="34">'
+    i = h.index('</header>')
+    head = h[:i].replace('<header class="topbar">', '<header class="topbar gc-top">', 1)
+    assert logo in head
+    h = head.replace(logo, mark, 1) + h[i:]
+    h = _sub(h, r'<section id="top" class="home-hero".*?</section>', HERO)
+    h = _sub(h, r'<section class="home-cards".*?</section>\s*', '')
+    old = '<section class="home-peek" style="padding: 0 24px 72px;">'
+    assert old in h
+    return h.replace(old, '<section class="home-peek" style="padding: 64px 24px 72px;">', 1)
