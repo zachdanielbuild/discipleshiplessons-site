@@ -117,7 +117,7 @@ def library(slug, titles, previews=False):
              + tiles('new-believers', [7, 8, 9, 10, 11, 12], [('Baptism Sign Up', 'Sign up', BAPTISM), ('Church Membership Class Sign Up', 'Sign up', MEMBERSHIP)]) + '</div>')
     s.append(f'<div class="lib-set" id="foundations">{head("foundations", "Discipleship Foundations", "For a believer who wants to grow.", "15 lessons · 3 parts · about 4 months")}'
              + prev('Fifteen lessons that build a lifestyle of knowing, loving and walking with Jesus. Do the three parts in order.')
-             + part('look-up', 'Part 1 · Look Up', 'Growing a lifestyle of loving Jesus and spending daily time with Him.', [2, 3, 1, 4, 5, 13], [('40 Days of Devotion', 'Join', DEVOTION)])
+             + part('look-up', 'Part 1 · Look Up', 'These lessons focus on growing a lifestyle of loving Jesus and walking with Him daily. Practically, this unit will help the person you are discipling start, strengthen, or reignite the daily habit of spending time with the Lord.', [2, 3, 1, 4, 5, 13], [('40 Days of Devotion', 'Join', DEVOTION)])
              + part('look-in', 'Part 2 · Look In', 'Growing a lifestyle of holiness, love and Christlike character.', [14, 15, 16, 17, 18], [('Freedom Prayer Experience', 'Open', 'the-freedom-prayer-experience.html')])
              + part('look-out', 'Part 3 · Look Out', 'Growing in a Great Commission lifestyle.', [19, 20, 21, 22], [('Short-Term Mission Trip', 'See trips', MISSIONS)])
              + '</div>')
