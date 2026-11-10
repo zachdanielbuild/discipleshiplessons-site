@@ -7,7 +7,7 @@ import chrome
 
 def body(slug, ARROW, titles):
     picks = chrome.picks([('#seekers', 'seekers', '1 · Seekers'), ('#new-believers', 'new-believers', '2 · New Believers'),
-                          ('#foundations', 'foundations', '3 · Foundations'), ('#further-growth', 'further-growth', '4 · Further Growth')])
+                          ('#foundations', 'foundations', '3 · Foundations')])
     hero = f'''<section class="fd2-hero"><div class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a></nav>
 <h1>Discipleship Foundations</h1>
