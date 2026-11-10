@@ -184,6 +184,11 @@ idx=f'''<title>DiscipleshipLessons.com</title>
 '''
 open(OUT+'index.html','w').write(idx)
 # ---------- content pages ----------
+# Section instructions and per-passage discussion questions, applied to the finished lesson body (Nov 10).
+# Each pair must match. A "What to do" line goes under each section heading.
+POST={
+ 'vision-for-a-vibrant-relationship-with-the-lord':[('<h2>Connection</h2>', '<h2>Connection</h2><p class="how"><span>What to do</span>Catch up on each other’s week and pray together. Then talk about what you hope God will do as you go through Look Up.</p>'), ('<h2>Vision</h2>', '<h2>Vision</h2><p class="how"><span>What to do</span>Read this out loud or share it in your own words.</p>'), ('<h2>Biblical Foundations</h2>', '<h2>Biblical Foundations</h2><p class="how"><span>What to do</span>Read each passage out loud together and fill in the blanks. Then talk through the questions below.</p>'), ('<h2>Modeling</h2>', '<h2>Modeling</h2><p class="how"><span>What to do</span>The leader shares. Walk through what your daily time with the Lord actually looks like: when, where, and what you do. Be honest about what is hard.</p>'), ('<h2>Practice</h2>', '<h2>Practice</h2><p class="how"><span>What to do</span>Sign up for 40 Days of Devotion together before you leave, pick a time and place for your daily time with the Lord, and plan to share how it went when you meet next.</p>'), ('<p>Questions for Discussion: What does it mean to &quot;know&quot; Jesus rather than just know about Him? What excites you about building this type of relationship with Jesus?</p>', '<p class="qlabel"><strong>Questions for Discussion:</strong></p><ol class="questions"><li>Mark 3:14: What did Jesus call the twelve to do before He sent them out? Why do you think He put that first?</li><li>John 15: What does Jesus promise will happen as we abide in Him? What does He say happens apart from Him?</li><li>Psalm 16:11: What do we find in God’s presence? When have you experienced that?</li><li>Philippians 3:8: How did Paul value knowing Jesus compared to everything else?</li><li>What does it mean to “know” Jesus rather than just know about Him?</li><li>What excites you about building this kind of relationship with Jesus?</li></ol>')],
+}
 def page(i):
     inf=info[i]; ids=inf['ids']; n=inf['n']; t=TITLES[i]
     lessonish=inf['track'] in('new-believers','look-up','look-in','look-out','freedom') and not(inf['track']=='freedom' and n==0)
@@ -444,7 +449,10 @@ def page(i):
     vbox=f'<figure class="vision-box">{re.sub(r"^Why\?",'<span class="why">Why?</span>',vision)}</figure>' if vision else ''
     printnote='<div class="print-only print-notes"><span>Notes</span><i></i><i></i><i></i></div>'
     prehtml=f'<div class="pre">{pre}</div>' if pre and re.sub(r'<[^>]+>','',pre).strip() else ''
-    bodyhtml=label_blanks(prehtml+(trail_html(secs) if secs else ''))
+    bodyhtml=prehtml+(trail_html(secs) if secs else '')
+    for a,b in POST.get(slug(i),[]):
+        assert a in bodyhtml,(slug(i),a[:70]); bodyhtml=bodyhtml.replace(a,b)
+    bodyhtml=label_blanks(bodyhtml)
     has_blanks='class="blank"' in bodyhtml
     clear='<button type="button" class="clear-answers">Clear my answers</button>' if has_blanks else ''
     if vision: desc=re.sub(r'^Why\?\s*','',vision)
