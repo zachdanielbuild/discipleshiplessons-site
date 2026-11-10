@@ -688,7 +688,7 @@ WHY={
  10:'Many new believers carry things from their old life: sin, demons, bitterness, wounds. This lesson helps them understand the freedom they have in Christ and walk through a prayer to break with the past.',
  11:'Jesus told His disciples to wait for the power of the Holy Spirit before they went out. This lesson helps them understand that promise and gives you time to pray together for them to be filled.',
  12:'Following Jesus was never meant to be done alone. This lesson helps them see why a local church matters and take the next step to belong to one.',
- 2:'Everything else in Look Up grows out of this. Help them see that Jesus wants them with Him first, and get them started on a daily habit of time with Him through 40 Days of Devotion.',
+ 2:'This lesson lays the foundation for all of Look Up. Help them see that our first calling is to be with Jesus, and give them a simple daily rhythm of Word, worship, prayer, listening, and obedience through 40 Days of Devotion.',
  3:'A disciple who can feed themselves from Scripture will keep growing long after you stop meeting. This lesson helps them taste how good God’s Word is and build a daily habit of reading it.',
  1:'Worship turns their attention from themselves to God. This lesson helps them discover worship as a privilege, not a duty, and find simple ways to worship in their daily time with Jesus.',
  4:'The early church was devoted to prayer and saw God answer. This lesson helps them grow from occasional prayer to a living conversation with God, using the Lord’s Prayer as a guide.',
