@@ -29,4 +29,5 @@ Pushing to `main` deploys to https://discipleshiplessons-site.pages.dev in about
 
 - **Edit a "Why?" statement:** change its entry in `VISION` in `buildsite.py` (keyed by lesson number; see `TITLES`).
 - **Fix lesson wording:** add a find-and-replace pair under that lesson's address in `FIXES`.
+- **Fill-in-the-blank rule (Nov 10):** in Scripture, one blank per missing word, and no answer longer than two words (show the rest of a longer phrase). Every Scripture blank is 12 underscores in `xml/items.json`, so they all render the same size. Write-in spaces (names, dates, Yes/No, prayer lines) can stay longer.
 - **Change styles:** edit `site/style.css`.
