@@ -57,7 +57,7 @@ HERO = '''<section id="top" class="home-hero gc-hero">
 <a class="p1" href="#seekers">A seeker</a>
 <a class="p2" href="#new-believers">A new believer</a>
 <a class="p3" href="#foundations">A growing disciple</a>
-<a class="p4" href="#further-growth">A leader</a>
+<a class="p4" href="#further-growth">Further growth</a>
 </div>
 <span class="gc-free">Free to use, print and share.</span>
 </div>
