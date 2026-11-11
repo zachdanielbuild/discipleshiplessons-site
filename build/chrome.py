@@ -109,9 +109,9 @@ def library(slug, titles, previews=False):
         return (f'<div class="lib-part" id="{key}"><p class="lib-part-head"><span>{label}</span>{desc}</p>{tiles(key, ids, ex)}</div>')
 
     s = []
-    s.append(f'<div class="lib-set" id="seekers">{head("seekers", "Seekers", "For someone who isn’t sure about Jesus yet.", "1 study · 3 reading plans")}'
-             + prev('This study is designed to be done with non-Christians who are interested in Jesus. You will read through the Gospel of John together and learn more about Him.')
-             + tiles('seekers', [6]) + '</div>')
+    s.append(f'<div class="lib-set" id="seekers">{head("seekers", "Seekers", "For someone who isn’t sure about Jesus yet.", "1 study · 1 lesson")}'
+             + prev('This study is designed to be done with non-Christians who are interested in Jesus. You will read through the Gospel of John together and learn more about Him, then walk through the Gospel lesson when they are ready.')
+             + tiles('seekers', [6, 7]) + '</div>')
     s.append(f'<div class="lib-set" id="new-believers">{head("new-believers", "New Believers", "For someone who just said yes to following Jesus.", "6 lessons · about 6 weeks")}'
              + prev('These lessons are designed to be done with new believers. You will focus on the gospel, baptism, deliverance and church membership.')
              + tiles('new-believers', [7, 8, 9, 10, 11, 12], [('Baptism Sign Up', 'Sign up', BAPTISM), ('Church Membership Class Sign Up', 'Sign up', MEMBERSHIP)]) + '</div>')
