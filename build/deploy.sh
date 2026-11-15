@@ -27,4 +27,5 @@ meta=f'''<meta name="description" content="{e(d)}">
 <meta name="twitter:card" content="summary_large_image">'''
 open(sys.argv[2],'w').write('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'+lines[0]+'\n'+meta+'\n'+lines[1].rstrip()+'\n</head>\n<body>\n'+body.rstrip()+'\n</body>\n</html>\n')
 PY
+python3 "$B/addga.py" "$R"
 echo "Built. Now: git add -A && git commit && git push"
