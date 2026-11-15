@@ -63,8 +63,7 @@ def footer(home=False):
     cols = [
         ('Lessons', None, [(f'{h}#seekers', 'Seekers'), (f'{h}#new-believers', 'New Believers'), (f'{h}#look-up', 'Look Up'),
                            (f'{h}#look-in', 'Look In'), (f'{h}#look-out', 'Look Out'), (f'{h}#further-growth', 'Further Growth')]),
-        ('Start here', None, [('who-should-i-disciple.html', 'Who should I disciple?'), (CHALLENGE, 'Disciplemakers Challenge'),
-                              (YT, 'Life on Life series'), (f'{h}#faq', 'Questions')]),
+        ('Start here', None, [('who-should-i-disciple.html', 'Who should I disciple?'), (YT, 'Life on Life series'), (f'{h}#faq', 'Questions')]),
         ('Experiences', 'experiences', [(DEVOTION, '40 Days of Devotion'), ('the-freedom-prayer-experience.html', 'Freedom Prayer'),
                                         (BAPTISM, 'Baptism'), (MEMBERSHIP, 'Church Membership'), (MISSIONS, 'Mission Trips')]),
     ]
@@ -74,8 +73,7 @@ def footer(home=False):
 <div class="foot-top">
 <div class="foot-brand"><span class="foot-name">DiscipleshipLessons.com</span>
 <span class="foot-tag">Simple and powerful lessons to help you make disciples in your sphere of influence.</span>
-<span class="foot-place">{PIN}Made in Waco, Texas, for neighborhoods and nations.</span>
-<a class="foot-btn" href="{CHALLENGE}">Take the Disciplemakers Challenge</a></div>
+<span class="foot-place">{PIN}Made in Waco, Texas, for neighborhoods and nations.</span></div>
 <div class="foot-cols">{c}</div>
 </div>
 <div class="foot-bottom"><span>Made with love by the folks at <a href="https://antiochwaco.com/">Antioch Waco</a>. Free to use, print and share.</span><span>© 2026 Antioch Community Church</span></div>
