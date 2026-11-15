@@ -24,6 +24,7 @@ Pushing to `main` deploys to https://discipleshiplessons-site.pages.dev in about
 | `site/favicon.svg`, `favicon.ico`, `favicon-96.png`, `apple-touch-icon.png`, `share.png` | Tab icon and phone icon (white A on brand green), link-preview image. |
 | `launchfiles.py` | Writes `_redirects`, `robots.txt`, `sitemap.xml` and `404.html`. |
 | `deploy.sh` | Runs both builders and copies the results to the repo root. |
+| `addga.py` | Adds the Google Analytics 4 tag (G-RNY0H1PHDL) to every page. Run by `deploy.sh`. |
 
 ## Common changes
 
